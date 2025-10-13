@@ -1,14 +1,16 @@
 #pragma once
+#include <unordered_map>
 #include "IEventHandler.h"
+#include "EventType.h"
 class EventManager
 {
 private:
-	std::map<sf::Event, std::vector<IEventHandler*>> event_map;
+	std::unordered_map<EventType, std::vector<IEventHandler*>> event_map;
 public:
 	EventManager(){}
-	void subscribe(sf::Event event, IEventHandler*& listener);
-	void unsubscribe(sf::Event, IEventHandler& entity);
+	void subscribe(const EventType& event, IEventHandler* listener);
+	void unsubscribe(EventType& event, IEventHandler* entity);
 	void unsubscribe(IEventHandler& entity);
-	void notify(sf::Event event);
+	void notify(const EventType& event);
 };
 

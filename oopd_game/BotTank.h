@@ -4,8 +4,13 @@ class BotTank : public Tank
 {
 private:
 	int health = 100;
+	std::string sprite = "rectangle";
+	std::string color = "red";
 public:
-	BotTank(int x, int y, int h = 100) : Tank(x, y), health(h) {}
-	void draw(sf::RenderWindow& window) override;
+	BotTank(Vector2& position, int h = 100) : Tank(position), health(h) {}
+	RenderData getRenderData() const override;
+	void onEvent(const EventType& event) override;
+	void publishEvent(EventType& event) override;
+	void update(float deltaTime) override;
 };
 

@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "EventType.h"
 class IEntity {
-	virtual void update(sf::Event event) = 0;
+public:
+	virtual void update(float deltaTime) = 0;
 };

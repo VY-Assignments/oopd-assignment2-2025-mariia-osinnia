@@ -1,9 +1,25 @@
 #include "BotTank.h"
 
-void BotTank::draw(sf::RenderWindow& window)
+
+void BotTank::publishEvent(EventType& event)
 {
-	sf::RectangleShape rectangle({ 10, 10 });
-	rectangle.setPosition(10, 10);
-	rectangle.setFillColor(sf::Color::Red);
-	window.draw(rectangle);
+}
+
+void BotTank::update(float deltaTime)
+{
+}
+
+RenderData BotTank::getRenderData() const
+{
+    RenderData renderData;
+    renderData.position = getPosition();
+    renderData.size = getSize();
+    renderData.color = color;
+    renderData.shape = sprite;
+    renderData.rotation = getRotation();
+    return renderData;
+}
+
+void BotTank::onEvent(const EventType & event)
+{
 }

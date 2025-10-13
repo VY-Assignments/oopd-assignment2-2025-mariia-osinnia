@@ -1,5 +1,6 @@
 #pragma once
+#include "RenderData.h"
 class IRenderable {
 public:
-	virtual void draw(sf::RenderWindow& window) = 0;
+	virtual RenderData getRenderData() const = 0;
 };

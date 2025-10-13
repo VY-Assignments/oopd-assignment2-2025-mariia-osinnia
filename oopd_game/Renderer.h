@@ -11,6 +11,7 @@ private:
 public:
 	Renderer(sf::RenderWindow& win, EntityManager& entityM) : window(win), entityManager(entityM) {}
 	void draw();
+	void drawFrame(const RenderData& renderData, sf::RenderWindow& window);
 	void getRenderable();
 };
 

@@ -5,10 +5,12 @@
 #include "EventManager.h"
 #include "TankFactory.h"
 #include "InteractiveObjectFactory.h"
+#include "EventType.h"
 int main() {
-	int windowSize = 300;
-	sf::RenderWindow window(sf::VideoMode(windowSize, 300), "Tanks Game");
-	
+	int windowWidth = 1280, windowHeight = 720;
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Tanks Game");
+	sf::Clock clock;
+
 	EntityManager entityManager;
 	EventManager eventManager;
 	Renderer renderer(window, entityManager);
@@ -23,7 +25,33 @@ int main() {
 	sf::Event event;
 
 	while (window.isOpen()) {
-		window.pollEvent(event);
+		float deltaTime = clock.restart().asSeconds();
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+			EventType gameEvent = EventType::None;
+			if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased) {
+				bool isPressed = event.type == sf::Event::KeyPressed;
+
+				switch (event.key.code) {
+				case sf::Keyboard::W: gameEvent = isPressed ? EventType::MovingForward : EventType::Stop; break;
+				case sf::Keyboard::S: gameEvent = isPressed ? EventType::MovingBackward : EventType::Stop; break;
+				case sf::Keyboard::A: gameEvent = isPressed ? EventType::TurnLeft : EventType::Stop; break;
+				case sf::Keyboard::D: gameEvent = isPressed ? EventType::TurnRight : EventType::Stop; break;
+				case sf::Keyboard::Space: if (isPressed) gameEvent = EventType::Shoot; break;
+				default: break;
+				}
+			}
+
+			if (gameEvent != EventType::None) {
+				eventManager.notify(gameEvent);
+			}
+		}
+		for (auto& entity : entityManager.getEntities()) {
+			entity->update(deltaTime);
+		}
+		renderer.getRenderable();
 		renderer.draw();
 	}
 }

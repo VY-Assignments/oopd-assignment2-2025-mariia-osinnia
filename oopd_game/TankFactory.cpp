@@ -3,11 +3,11 @@
 #include "BotTank.h"
 #include <iostream>
 
-std::unique_ptr<IEntity> TankFactory::create(std::string& type, std::vector<int>& params)
+std::unique_ptr<IEntity> TankFactory::create(std::string& type, Vector2 & position)
 {
     TankType tankType = parseType(type);
-    if (tankType == PLAYER_TANK) return std::make_unique<PlayerTank>(params[0], params[1]);
-    else if (tankType == BOT_TANK) return std::make_unique<BotTank>(params[0], params[1]);
+    if (tankType == PLAYER_TANK) return std::make_unique<PlayerTank>(position);
+    else if (tankType == BOT_TANK) return std::make_unique<BotTank>(position);
     else {
         std::cout << "Unknown tank type" << std::endl;
         return nullptr;

@@ -1,6 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "EventType.h"
+
 class IEventHandler {
-	virtual void onEvent(sf::Event event) = 0;
-	virtual void publishEvent(sf::Event event) = 0;
+public:
+	virtual void onEvent(const EventType & event) = 0;
+	virtual void publishEvent(EventType& event) = 0;
 };

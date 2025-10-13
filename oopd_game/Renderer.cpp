@@ -2,12 +2,23 @@
 #include "IRenderable.h"
 void Renderer::draw()
 {
-	getRenderable();
 	window.clear();
-	for (const auto& r : renderable) {
-		r->draw(window);
+	for (auto obj : renderable) {
+		drawFrame(obj->getRenderData(), window);
 	}
 	window.display();
+}
+
+void Renderer::drawFrame(const RenderData& renderData, sf::RenderWindow& window)
+{
+	if (renderData.shape == "rectangle") {
+		sf::RectangleShape rect;
+		rect.setPosition(renderData.position.x, renderData.position.y);
+		rect.setSize({ renderData.size.x, renderData.size.y });
+		rect.setFillColor(sf::Color::Green);
+		rect.setRotation(renderData.rotation);
+		window.draw(rect);
+	}
 }
 
 void Renderer::getRenderable()

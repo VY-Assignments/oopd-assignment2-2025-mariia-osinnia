@@ -3,11 +3,11 @@
 #include "HealthPack.h"
 #include <iostream>
 
-std::unique_ptr<IEntity> InteractiveObjectFactory::create(std::string& type, std::vector<int>& params)
+std::unique_ptr<IEntity> InteractiveObjectFactory::create(std::string& type, Vector2 & position)
 {
 	InteractiveObjectType objectType = parseType(type);
-	if (objectType == MINE) return std::make_unique<Mine>(params[0], params[1]);
-	else if (objectType == HEALTH_PACK) return std::make_unique<HealthPack>(params[0], params[1]);
+	if (objectType == MINE) return std::make_unique<Mine>(position);
+	else if (objectType == HEALTH_PACK) return std::make_unique<HealthPack>(position);
 	else {
 		std::cout << "Unknown interactive object type" << std::endl;
 		return nullptr;

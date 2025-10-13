@@ -9,7 +9,7 @@ private:
 public:
 	EntityManager(){}
 	void addEntity(std::unique_ptr<IEntity> entity);
-	const std::vector<std::unique_ptr<IEntity>>& getEntities(){
+	std::vector<std::unique_ptr<IEntity>>& getEntities(){
 		return entities;
 	}
 };

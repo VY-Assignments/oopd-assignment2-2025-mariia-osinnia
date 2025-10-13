@@ -1,5 +1,5 @@
 #include "InteractiveObject.h"
 
-void InteractiveObject::update(sf::Event event)
+void InteractiveObject::update(float deltaTime)
 {
 }
