@@ -13,6 +13,7 @@ void Renderer::drawFrame(const RenderData& renderData, sf::RenderWindow& window)
 {
 	if (renderData.shape == "rectangle") {
 		sf::RectangleShape rect;
+		rect.setOrigin(renderData.size.x / 2, renderData.size.y / 2);
 		rect.setPosition(renderData.position.x, renderData.position.y);
 		rect.setSize({ renderData.size.x, renderData.size.y });
 		rect.setFillColor(sf::Color::Green);
