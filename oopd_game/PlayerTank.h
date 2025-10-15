@@ -12,7 +12,7 @@ private:
 	bool turningRight = false;
 	bool turningLeft = false;
 public:
-	PlayerTank(Vector2& position, int h = 100) : Tank(position), health(h) {}
+	PlayerTank(EntityManager& entityM, Vector2& position, int h = 100) : Tank(entityM, position), health(h) {}
 	RenderData getRenderData() const override;
 	void onEvent(const EventType& event) override;
 	void publishEvent(EventType& event) override;

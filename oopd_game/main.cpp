@@ -15,7 +15,7 @@ int main() {
 	EventManager eventManager;
 	Renderer renderer(window, entityManager);
 
-	TankFactory tankF;
+	TankFactory tankF(entityManager);
 	InteractiveObjectFactory interactiveObjectF;
 	IEntityFactory& tankFactory = tankF;
 	IEntityFactory& interactiveObjectFactory = interactiveObjectF;
@@ -48,9 +48,7 @@ int main() {
 				eventManager.notify(gameEvent);
 			}
 		}
-		for (auto& entity : entityManager.getEntities()) {
-			entity->update(deltaTime);
-		}
+		entityManager.updateAll(deltaTime);
 		renderer.getRenderable();
 		renderer.draw();
 	}

@@ -11,5 +11,8 @@ public:
 	virtual void update(float deltaTime) = 0;
 	virtual void onEvent(const EventType& event) = 0;
 	virtual void publishEvent(EventType& event) = 0;
+
+	// Inherited via IEntity
+	bool isAllive() override;
 };
 

@@ -13,7 +13,7 @@ void GameManager::init() {
 	eventManager.subscribe(EventType::TurnLeft, dynamic_cast<IEventHandler*>(playerTank.get()));
 	eventManager.subscribe(EventType::TurnRight, dynamic_cast<IEventHandler*>(playerTank.get()));
 	eventManager.subscribe(EventType::Stop, dynamic_cast<IEventHandler*>(playerTank.get()));
-
+	eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventHandler*>(playerTank.get()));
 	entityManager.addEntity(std::move(playerTank));
 
 	Vector2 position1 = { 20, 20 };

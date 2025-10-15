@@ -3,24 +3,29 @@
 #include "IRenderable.h"
 #include "IEventHandler.h"
 #include "Vector2.h"
+#include "EntityManager.h"
 
 class Tank : public IEntity, public IRenderable, public IEventHandler
 {
 private:
+	EntityManager& entityManager;
 	Vector2 position = {0, 0};
 	Vector2 direction = {0, 0};
 	Vector2 size = { 30, 30 };
 	float speed = 200.0f;
 	float rotation = 0.0f;
 	float rotationSpeed = 100.0f;
+
+	float fireCooldown = 0.5f;
+	float timeSinceLastShot = fireCooldown;
 public:
-	Tank(Vector2& p, float s = 200.0f, Vector2 sz = { 30, 30 }) : position(p), speed(s), size(sz) {}
+	Tank(EntityManager& entityM, Vector2& p, float s = 200.0f, Vector2 sz = { 30, 30 }) : entityManager(entityM), position(p), speed(s), size(sz) {}
 
 	virtual RenderData getRenderData() const = 0;
 	virtual void onEvent(const EventType& event) = 0;
 	virtual void publishEvent(EventType& event) = 0;
 	virtual void update(float deltaTime) = 0;
-
+	void shoot();
 	Vector2 getPosition() const { return position; }
 	void setPosition(const Vector2& pos) { position = pos; }
 
@@ -36,5 +41,7 @@ public:
 
 	float getRotationSpeed() { return rotationSpeed; }
 	void setRotationSpeed(float rSpeed) { rotation = rSpeed; }
+
+	bool isAllive() override;
 };
 

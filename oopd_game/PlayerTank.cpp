@@ -38,6 +38,9 @@ void PlayerTank::onEvent(const EventType & event)
         turningRight = false;
         turningLeft = false;
         break;
+    case EventType::Shoot:
+        shoot();
+        break;
     }
 }
 
@@ -48,6 +51,7 @@ void PlayerTank::publishEvent(EventType& event)
 
 void PlayerTank::update(float deltaTime)
 {
+    Tank::update(deltaTime);
     const float PI = 3.1415926f;
 
     float rotation = getRotation();
@@ -63,6 +67,7 @@ void PlayerTank::update(float deltaTime)
     Vector2 position = getPosition();
 
     Vector2 direction = { std::cos(radRotation), std::sin(radRotation) };
+    setDirection(direction);
     if (movingForward)  position += direction * speed * deltaTime;
     if (movingBackward) position -= direction * speed * deltaTime;
 

@@ -12,5 +12,6 @@ public:
 	std::vector<std::unique_ptr<IEntity>>& getEntities(){
 		return entities;
 	}
+	void updateAll(float deltaTime);
 };
 

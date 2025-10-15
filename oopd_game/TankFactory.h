@@ -1,7 +1,9 @@
 #pragma once
-#include "IEntityFactory.h"
 #include <memory>
 #include "Vector2.h"
+#include "IEntityFactory.h"
+#include "EntityManager.h"
+
 enum TankType {
 	PLAYER_TANK,
 	BOT_TANK,
@@ -10,7 +12,10 @@ enum TankType {
 class TankFactory : public IEntityFactory
 {
 private:
+	EntityManager& entityManager;
 	std::unique_ptr<IEntity> create(std::string& type, Vector2& position) override;
 	static TankType parseType(std::string& type);
+public:
+	TankFactory(EntityManager& entityM) : entityManager(entityM){}
 };
 

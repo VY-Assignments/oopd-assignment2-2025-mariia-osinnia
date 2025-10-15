@@ -7,7 +7,7 @@ private:
 	std::string sprite = "rectangle";
 	std::string color = "red";
 public:
-	BotTank(Vector2& position, int h = 100) : Tank(position), health(h) {}
+	BotTank(EntityManager& entityM, Vector2& position, int h = 100) : Tank(entityM, position), health(h) {}
 	RenderData getRenderData() const override;
 	void onEvent(const EventType& event) override;
 	void publishEvent(EventType& event) override;

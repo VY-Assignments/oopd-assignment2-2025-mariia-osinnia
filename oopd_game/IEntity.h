@@ -4,4 +4,5 @@
 class IEntity {
 public:
 	virtual void update(float deltaTime) = 0;
+	virtual bool isAllive() = 0; 
 };

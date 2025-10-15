@@ -16,7 +16,13 @@ void Renderer::drawFrame(const RenderData& renderData, sf::RenderWindow& window)
 		rect.setOrigin(renderData.size.x / 2, renderData.size.y / 2);
 		rect.setPosition(renderData.position.x, renderData.position.y);
 		rect.setSize({ renderData.size.x, renderData.size.y });
-		rect.setFillColor(sf::Color::Green);
+		std::string color = renderData.color;
+		if (color == "yellow"){
+			rect.setFillColor(sf::Color::Yellow);
+		}
+		else if (color == "green") {
+			rect.setFillColor(sf::Color::Green);
+		}
 		rect.setRotation(renderData.rotation);
 		window.draw(rect);
 	}
