@@ -1,6 +1,7 @@
 #include "Tank.h"
 #include "Projectile.h"
 #include "EntityManager.h" 
+#include <iostream>
 
 void Tank::update(float deltaTime)
 {
@@ -30,6 +31,9 @@ void Tank::heal(int healBonus)
 
 void Tank::onCollision(IEntity* entity)
 {
+	if (Tank* tank = dynamic_cast<Tank*>(entity)) {
+		std::cout << "tank collision\n";
+	}
 }
 
 

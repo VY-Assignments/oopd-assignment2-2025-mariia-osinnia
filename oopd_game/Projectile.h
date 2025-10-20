@@ -9,6 +9,7 @@ private:
 	int damage = 10;
 	float speed = 100.0f;
 	Vector2 direction = {0, 0};
+	float rotation = 0.0f;
 	Vector2 position = { 0, 0 };
 	std::string sprite = "rectangle";
 	Vector2 size = { 5, 5 };
@@ -26,6 +27,7 @@ public:
 
 
 	Vector2 getPosition() const override { return position; }
+	float getRotation() const override { return rotation; }
 	Vector2 getSize() const override { return size; }
 };
 

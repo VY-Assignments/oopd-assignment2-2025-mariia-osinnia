@@ -8,6 +8,7 @@ class InteractiveObject : public IEntity, public IEventHandler
 {
 private:
 	Vector2 position{0,0};
+	float rotation = 0;
 	Vector2 size{1,1};
 	bool isAlive = true;
 public:
@@ -20,6 +21,7 @@ public:
 	virtual void interact(Tank* tank) = 0;
 
 	Vector2 getPosition() const override { return position; };
+	float getRotation() const override { return rotation; }
 	Vector2 getSize() const override { return size; };
 
 };

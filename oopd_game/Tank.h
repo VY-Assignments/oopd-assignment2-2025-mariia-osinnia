@@ -40,7 +40,7 @@ public:
 
 	float getSpeed() const { return speed; }
 
-	float getRotation() const { return rotation; }
+	float getRotation() const override { return rotation; }
 	void setRotation(float r) { rotation = r; }
 
 	float getRotationSpeed() { return rotationSpeed; }

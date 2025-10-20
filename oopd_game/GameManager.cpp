@@ -16,7 +16,7 @@ void GameManager::init() {
 	eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventHandler*>(playerTank.get()));
 	entityManager.addEntity(std::move(playerTank));
 
-	Vector2 position1 = { 20, 20 };
+	Vector2 position1 = { 50, 50 };
 	std::string type1 = "bot";
 	entityManager.addEntity(tankFactory.create(type1, position1));
 }
