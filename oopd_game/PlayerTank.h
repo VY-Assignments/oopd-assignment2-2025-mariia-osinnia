@@ -4,7 +4,6 @@
 class PlayerTank : public Tank
 {
 private:
-	int health = 100;
 	std::string sprite = "rectangle";
 	std::string color = "green";
 	bool movingForward = false;
@@ -12,7 +11,7 @@ private:
 	bool turningRight = false;
 	bool turningLeft = false;
 public:
-	PlayerTank(EntityManager& entityM, Vector2& position, int h = 100) : Tank(entityM, position), health(h) {}
+	PlayerTank(EntityManager& entityM, Vector2& position) : Tank(entityM, position) {}
 	RenderData getRenderData() const override;
 	void onEvent(const EventType& event) override;
 	void publishEvent(EventType& event) override;

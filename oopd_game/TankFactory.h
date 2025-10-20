@@ -16,6 +16,7 @@ private:
 	std::unique_ptr<IEntity> create(std::string& type, Vector2& position) override;
 	static TankType parseType(std::string& type);
 public:
-	TankFactory(EntityManager& entityM) : entityManager(entityM){}
+	TankFactory(EntityManager& entityM) : entityManager(entityM){
+	}
 };
 

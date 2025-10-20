@@ -1,9 +1,13 @@
 #include "Tank.h"
 #include "Projectile.h"
+#include "EntityManager.h" 
 
 void Tank::update(float deltaTime)
 {
 	timeSinceLastShot += deltaTime;
+	if (health <= 0) {
+		isAlive = false;
+	}
 }
 
 void Tank::shoot()
@@ -14,9 +18,18 @@ void Tank::shoot()
 	}
 }
 
-bool Tank::isAllive()
+void Tank::takeDamage(int damage)
 {
-	return true;
+	health -= damage;
+}
+
+void Tank::heal(int healBonus)
+{
+	health += healBonus;
+}
+
+void Tank::onCollision(IEntity* entity)
+{
 }
 
 

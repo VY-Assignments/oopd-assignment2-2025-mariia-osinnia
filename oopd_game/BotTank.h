@@ -3,11 +3,10 @@
 class BotTank : public Tank
 {
 private:
-	int health = 100;
 	std::string sprite = "rectangle";
 	std::string color = "red";
 public:
-	BotTank(EntityManager& entityM, Vector2& position, int h = 100) : Tank(entityM, position), health(h) {}
+	BotTank(EntityManager& entityM, Vector2& position) : Tank(entityM, position) {}
 	RenderData getRenderData() const override;
 	void onEvent(const EventType& event) override;
 	void publishEvent(EventType& event) override;

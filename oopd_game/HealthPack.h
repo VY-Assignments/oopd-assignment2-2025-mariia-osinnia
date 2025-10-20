@@ -12,5 +12,6 @@ public:
 	void onEvent(const EventType& event) override;
 	void publishEvent(EventType& event) override;
 	void update(float deltaTime) override;
+	void interact(Tank* tank) override;
 };
 

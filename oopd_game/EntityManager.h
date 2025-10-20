@@ -2,6 +2,9 @@
 #include <vector>
 #include <memory>
 #include "IEntity.h"
+#include "Tank.h"
+#include "Projectile.h"
+#include "InteractiveObject.h"
 class EntityManager
 {
 private:
@@ -9,9 +12,11 @@ private:
 public:
 	EntityManager(){}
 	void addEntity(std::unique_ptr<IEntity> entity);
-	std::vector<std::unique_ptr<IEntity>>& getEntities(){
-		return entities;
-	}
+	std::vector<std::unique_ptr<IEntity>>& getEntities();
+	std::vector<Tank*> getTanks();
+	std::vector<Projectile*> getProjectiles();
+	std::vector<InteractiveObject*> getInteractiveObjects();
+
 	void updateAll(float deltaTime);
 };
 

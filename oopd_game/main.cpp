@@ -6,6 +6,7 @@
 #include "TankFactory.h"
 #include "InteractiveObjectFactory.h"
 #include "EventType.h"
+#include "CollisionManager.h"
 int main() {
 	int windowWidth = 1280, windowHeight = 720;
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Tanks Game");
@@ -21,6 +22,7 @@ int main() {
 	IEntityFactory& interactiveObjectFactory = interactiveObjectF;
 
 	GameManager gameManager(eventManager, entityManager, tankFactory, interactiveObjectFactory);
+	CollisionManager collisionManager(entityManager);
 
 	sf::Event event;
 
@@ -49,6 +51,7 @@ int main() {
 			}
 		}
 		entityManager.updateAll(deltaTime);
+		collisionManager.checkCollision();
 		renderer.getRenderable();
 		renderer.draw();
 	}

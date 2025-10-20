@@ -7,7 +7,7 @@ class Projectile : public IEntity, public IRenderable
 {
 private:
 	int damage = 10;
-	float speed = 600.0f;
+	float speed = 100.0f;
 	Vector2 direction = {0, 0};
 	Vector2 position = { 0, 0 };
 	std::string sprite = "rectangle";
@@ -21,6 +21,11 @@ public:
 
 	void update(float deltaTime) override;
 	RenderData getRenderData() const override;
-	bool isAllive() override;
+	bool isAllive() override { return isAlive; };
+	void onCollision(IEntity* entity) override;
+
+
+	Vector2 getPosition() const override { return position; }
+	Vector2 getSize() const override { return size; }
 };
 

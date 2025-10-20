@@ -1,4 +1,6 @@
 #include "Projectile.h"
+#include "Tank.h"
+#include <iostream>
 
 void Projectile::update(float deltaTime)
 {
@@ -19,7 +21,11 @@ RenderData Projectile::getRenderData() const
 	return renderData;
 }
 
-bool Projectile::isAllive()
+void Projectile::onCollision(IEntity* entity)
 {
-	return isAlive;
+	if (Tank* tank = dynamic_cast<Tank*>(entity)) {
+		tank->takeDamage(damage);
+		isAlive = false;
+		std::cout << "Collision\n";
+	}
 }

@@ -1,10 +1,19 @@
 #include "InteractiveObject.h"
+#include "Tank.h"
 
 void InteractiveObject::update(float deltaTime)
 {
+
 }
 
-bool InteractiveObject::isAllive()
+void InteractiveObject::onCollision(IEntity* entity)
 {
-    return true;
+	if (Tank* tank = dynamic_cast<Tank*>(entity)) {
+		interact(tank);
+	}
 }
+
+
+
+
+
