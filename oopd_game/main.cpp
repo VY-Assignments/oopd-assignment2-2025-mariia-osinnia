@@ -7,6 +7,7 @@
 #include "InteractiveObjectFactory.h"
 #include "EventType.h"
 #include "CollisionManager.h"
+
 int main() {
 	int windowWidth = 1280, windowHeight = 720;
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Tanks Game");
@@ -16,7 +17,7 @@ int main() {
 	EventManager eventManager;
 	Renderer renderer(window, entityManager);
 
-	TankFactory tankF(entityManager);
+	TankFactory tankF(entityManager, eventManager);
 	InteractiveObjectFactory interactiveObjectF;
 	IEntityFactory& tankFactory = tankF;
 	IEntityFactory& interactiveObjectFactory = interactiveObjectF;
@@ -32,6 +33,7 @@ int main() {
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
+
 			EventType gameEvent = EventType::None;
 			if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased) {
 				bool isPressed = event.type == sf::Event::KeyPressed;
@@ -50,6 +52,8 @@ int main() {
 				eventManager.notify(gameEvent);
 			}
 		}
+
+		gameManager.update(deltaTime);
 		entityManager.updateAll(deltaTime);
 		collisionManager.checkCollision();
 		renderer.getRenderable();

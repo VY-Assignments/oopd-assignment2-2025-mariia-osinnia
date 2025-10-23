@@ -6,8 +6,12 @@
 std::unique_ptr<IEntity> InteractiveObjectFactory::create(std::string& type, Vector2 & position)
 {
 	InteractiveObjectType objectType = parseType(type);
-	if (objectType == MINE) return std::make_unique<Mine>(position);
-	else if (objectType == HEALTH_PACK) return std::make_unique<HealthPack>(position);
+	if (objectType == MINE) {
+		return std::make_unique<Mine>(position);
+	}
+	else if (objectType == HEALTH_PACK) {
+		return std::make_unique<HealthPack>(position);
+	}
 	else {
 		std::cout << "Unknown interactive object type" << std::endl;
 		return nullptr;
@@ -16,7 +20,13 @@ std::unique_ptr<IEntity> InteractiveObjectFactory::create(std::string& type, Vec
 
 InteractiveObjectType InteractiveObjectFactory::parseType(std::string& type)
 {
-	if (type == "mine") return MINE;
-	else if (type == "healthPack") return HEALTH_PACK;
-	else return UNKNOWN_OBJECT;
+	if (type == "mine") {
+		return MINE;
+	}
+	else if (type == "healthPack") {
+		return HEALTH_PACK;
+	}
+	else {
+		return UNKNOWN_OBJECT;
+	}
 }

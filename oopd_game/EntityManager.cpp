@@ -10,37 +10,9 @@ std::vector<std::unique_ptr<IEntity>>& EntityManager::getEntities()
 	return entities;
 }
 
-std::vector<Tank*> EntityManager::getTanks()
+void EntityManager::clear()
 {
-	std::vector<Tank*> tanks;
-	for (auto& entity : entities) {
-		if (Tank* tank = dynamic_cast<Tank*>(entity.get())) {
-			tanks.push_back(tank);
-		}
-	}
-	return tanks;
-}
-
-std::vector<Projectile*> EntityManager::getProjectiles()
-{
-	std::vector<Projectile*> projectiles;
-	for (auto& entity : entities) {
-		if (Projectile* projectile = dynamic_cast<Projectile*>(entity.get())) {
-			projectiles.push_back(projectile);
-		}
-	}
-	return projectiles;
-}
-
-std::vector<InteractiveObject*> EntityManager::getInteractiveObjects()
-{
-	std::vector<InteractiveObject*> interactiveObjects;
-	for (auto& entity : entities) {
-		if (InteractiveObject* interactiveObject = dynamic_cast<InteractiveObject*>(entity.get())) {
-			interactiveObjects.push_back(interactiveObject);
-		}
-	}
-	return interactiveObjects;
+	entities.clear();
 }
 
 void EntityManager::updateAll(float deltaTime)

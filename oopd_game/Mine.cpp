@@ -9,11 +9,19 @@ void Mine::publishEvent(EventType& event)
 {
 }
 
-void Mine::update(float deltaTime)
-{
-}
 
 void Mine::interact(Tank* tank)
 {
 	tank->takeDamage(damage);
+}
+
+RenderData Mine::getRenderData() const
+{
+    RenderData renderData;
+    renderData.position = getPosition();
+    renderData.size = getSize();
+    renderData.color = color;
+    renderData.shape = sprite;
+    renderData.rotation = getRotation();
+    return renderData;
 }

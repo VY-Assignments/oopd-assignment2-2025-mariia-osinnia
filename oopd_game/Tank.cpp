@@ -1,7 +1,6 @@
 #include "Tank.h"
 #include "Projectile.h"
 #include "EntityManager.h" 
-#include <iostream>
 
 void Tank::update(float deltaTime)
 {
@@ -14,7 +13,11 @@ void Tank::update(float deltaTime)
 void Tank::shoot()
 {
 	if (timeSinceLastShot >= fireCooldown) {
-		entityManager.addEntity(std::make_unique<Projectile>(position, direction));
+		float tankHalfLength = size.x / 2;
+		float projectileOffset = 5.0f;
+		Vector2 projectileSpawn = position + direction * (tankHalfLength + projectileOffset);
+
+		entityManager.addEntity(std::make_unique<Projectile>(projectileSpawn, direction));
 		timeSinceLastShot = 0.0f;
 	}
 }
@@ -31,9 +34,7 @@ void Tank::heal(int healBonus)
 
 void Tank::onCollision(IEntity* entity)
 {
-	if (Tank* tank = dynamic_cast<Tank*>(entity)) {
-		std::cout << "tank collision\n";
-	}
+
 }
 
 

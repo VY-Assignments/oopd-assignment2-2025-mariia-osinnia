@@ -7,7 +7,7 @@ class Projectile : public IEntity, public IRenderable
 {
 private:
 	int damage = 10;
-	float speed = 100.0f;
+	float speed = 600.0f;
 	Vector2 direction = {0, 0};
 	float rotation = 0.0f;
 	Vector2 position = { 0, 0 };

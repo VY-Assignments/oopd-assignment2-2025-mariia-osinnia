@@ -7,7 +7,7 @@
 void CollisionManager::checkCollision()
 {
     std::vector<std::unique_ptr<IEntity>>& entities = entityManager.getEntities();
-    float PI = 3.1415926f;
+    const float PI = 3.1415926f;
 
     for (size_t i = 0; i < entities.size(); ++i) {
         for (size_t j = i + 1; j < entities.size(); ++j) {
@@ -24,14 +24,6 @@ void CollisionManager::checkCollision()
             }
         }
     }
-}
-
-bool CollisionManager::checkAABB(const Vector2& position1, const Vector2& size1, const Vector2& position2, const Vector2& size2)
-{
-	return (
-		std::abs(position1.x - position2.x) * 2 < (size1.x + size2.x) &&
-		std::abs(position1.y - position2.y) * 2 < (size1.y + size2.y)
-		);
 }
 
 bool CollisionManager::checkOBB(const Vector2& position1, const Vector2& size1, const float rotation1, 

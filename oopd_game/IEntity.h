@@ -1,6 +1,4 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "EventType.h"
 #include "Vector2.h"
 
 class IEntity {

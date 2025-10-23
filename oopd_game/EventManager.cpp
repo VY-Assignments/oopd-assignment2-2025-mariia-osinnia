@@ -2,13 +2,19 @@
 
 void EventManager::subscribe(const EventType& event, IEventHandler* listener)
 {
-	if (event_map.find(event) != event_map.end()) {
-		event_map[event].push_back(listener);
-	}
-	else {
-		std::vector<IEventHandler*> listeners;
+	std::vector<IEventHandler*>& listeners = event_map[event];
+	if (std::find(listeners.begin(), listeners.end(), listener) == listeners.end()) {
 		listeners.push_back(listener);
-		event_map.insert({event, listeners});
+	}
+}
+
+void EventManager::unsubscribe(IEventHandler& entity)
+{
+	for (auto& [eventType, listeners] : event_map) {
+		listeners.erase(
+			std::remove(listeners.begin(), listeners.end(), &entity),
+			listeners.end()
+		);
 	}
 }
 
@@ -20,4 +26,12 @@ void EventManager::notify(const EventType& event)
 			listener->onEvent(event);
 		}
 	}
+}
+
+void EventManager::unsubscribeAll()
+{
+	for (auto& [eventType, listeners] : event_map) {
+		listeners.clear();
+	}
+	event_map.clear();
 }

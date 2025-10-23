@@ -13,5 +13,7 @@ public:
 	void draw();
 	void drawFrame(const RenderData& renderData, sf::RenderWindow& window);
 	void getRenderable();
+    void drawVictoryScreen();
+	void drawGameOverScreen();
 };
 

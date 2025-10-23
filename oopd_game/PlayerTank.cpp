@@ -1,5 +1,5 @@
 #include "PlayerTank.h"
-
+#include "EventType.h"
 RenderData PlayerTank::getRenderData() const
 {
     RenderData renderData;
@@ -13,8 +13,6 @@ RenderData PlayerTank::getRenderData() const
 
 void PlayerTank::onEvent(const EventType & event)
 {
-    float rotation = getRotation();
-    float rotationSpeed = getRotationSpeed();
     switch (event) {
     case EventType::MovingForward: 
         movingForward = true; 
@@ -46,19 +44,30 @@ void PlayerTank::onEvent(const EventType & event)
 
 void PlayerTank::publishEvent(EventType& event)
 {
-
-}
+    EventManager eventManager = getEventManager();
+    eventManager.notify(event);
+}   
 
 void PlayerTank::update(float deltaTime)
 {
     Tank::update(deltaTime);
+    if (!isAllive()) {
+        EventType event = EventType::GameOver;
+        publishEvent(event);
+        IEventHandler& playerTank = *dynamic_cast<IEventHandler*>(this);
+        getEventManager().unsubscribe(playerTank);
+    }
     const float PI = 3.1415926f;
 
     float rotation = getRotation();
     float rotationSpeed = getRotationSpeed();
 
-    if (turningLeft) rotation -= rotationSpeed * deltaTime;
-    if (turningRight) rotation += rotationSpeed * deltaTime;
+    if (turningLeft) {
+        rotation -= rotationSpeed * deltaTime;
+    }
+    if (turningRight) {
+        rotation += rotationSpeed * deltaTime;
+    }
     setRotation(rotation);
 
     float radRotation = rotation * PI / 180;
@@ -68,8 +77,12 @@ void PlayerTank::update(float deltaTime)
 
     Vector2 direction = { std::cos(radRotation), std::sin(radRotation) };
     setDirection(direction);
-    if (movingForward)  position += direction * speed * deltaTime;
-    if (movingBackward) position -= direction * speed * deltaTime;
+    if (movingForward) {
+        position += direction * speed * deltaTime;
+    }
+    if (movingBackward) {
+        position -= direction * speed * deltaTime;
+    }
 
     setPosition(position);
 }

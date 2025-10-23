@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "IRenderable.h"
+
 void Renderer::draw()
 {
 	window.clear();
@@ -23,6 +24,12 @@ void Renderer::drawFrame(const RenderData& renderData, sf::RenderWindow& window)
 		else if (color == "green") {
 			rect.setFillColor(sf::Color::Green);
 		}
+		else if (color == "pink") {
+			rect.setFillColor(sf::Color::Magenta);
+		}
+		else if (color == "blue") {
+			rect.setFillColor(sf::Color::Blue);
+		}
 		rect.setRotation(renderData.rotation);
 		window.draw(rect);
 	}
@@ -37,6 +44,40 @@ void Renderer::getRenderable()
 			renderable.push_back(r);
 		}
 	}
+}
+
+void Renderer::drawVictoryScreen()
+{
+	window.clear(sf::Color::Green);
+
+	sf::Font font;
+	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
+	sf::Text text;
+	text.setFont(font);
+	text.setCharacterSize(50);
+	text.setFillColor(sf::Color::White);
+	text.setString("Victory!");
+	text.setPosition(400, 300);
+
+	window.draw(text);
+	window.display();
+}
+
+void Renderer::drawGameOverScreen()
+{
+	window.clear(sf::Color::Red);
+
+	sf::Font font;
+	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
+	sf::Text text;
+	text.setFont(font);
+	text.setCharacterSize(50);
+	text.setFillColor(sf::Color::White);
+	text.setString("Game Over!");
+	text.setPosition(400, 300);
+
+	window.draw(text);
+	window.display();
 }
 
 

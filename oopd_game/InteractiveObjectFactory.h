@@ -1,6 +1,7 @@
 #pragma once
 #include "IEntityFactory.h"
 #include "Vector2.h"
+
 enum InteractiveObjectType {
 	MINE,
 	HEALTH_PACK,

@@ -3,13 +3,17 @@
 
 void InteractiveObject::update(float deltaTime)
 {
-
+	age += deltaTime;
+	if (age >= lifeTime) {
+		isAlive = false;
+	}
 }
 
 void InteractiveObject::onCollision(IEntity* entity)
 {
 	if (Tank* tank = dynamic_cast<Tank*>(entity)) {
 		interact(tank);
+		isAlive = false;
 	}
 }
 

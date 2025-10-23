@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include "IEventHandler.h"
 #include "EventType.h"
+
 class EventManager
 {
 private:
@@ -9,8 +10,8 @@ private:
 public:
 	EventManager(){}
 	void subscribe(const EventType& event, IEventHandler* listener);
-	void unsubscribe(EventType& event, IEventHandler* entity);
 	void unsubscribe(IEventHandler& entity);
 	void notify(const EventType& event);
+	void unsubscribeAll();
 };
 

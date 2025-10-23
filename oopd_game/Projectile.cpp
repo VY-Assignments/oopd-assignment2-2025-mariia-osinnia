@@ -1,6 +1,5 @@
 #include "Projectile.h"
 #include "Tank.h"
-#include <iostream>
 
 void Projectile::update(float deltaTime)
 {
@@ -26,6 +25,5 @@ void Projectile::onCollision(IEntity* entity)
 	if (Tank* tank = dynamic_cast<Tank*>(entity)) {
 		tank->takeDamage(damage);
 		isAlive = false;
-		std::cout << "Collision\n";
 	}
 }

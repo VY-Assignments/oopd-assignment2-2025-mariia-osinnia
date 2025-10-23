@@ -11,9 +11,19 @@ struct Vector2 {
 		return std::sqrt(x * x + y * y);
 	}
 
+	Vector2 operator-(const Vector2& other) const {
+		return { x - other.x, y - other.y };
+	}
+
+	Vector2 operator/(float scalar) const {
+		return { x / scalar, y / scalar };
+	}
+
 	Vector2 normalized() const {
 		float len = length();
-		if (len == 0) return Vector2(0, 0);
+		if (len == 0) {
+			return Vector2(0, 0);
+		}
 		return Vector2(x / len, y / len);
 	}
 

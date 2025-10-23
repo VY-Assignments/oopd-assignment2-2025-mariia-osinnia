@@ -9,11 +9,18 @@ void HealthPack::publishEvent(EventType& event)
 {
 }
 
-void HealthPack::update(float deltaTime)
-{
-}
-
 void HealthPack::interact(Tank* tank)
 {
 	tank->heal(healthBonus);
+}
+
+RenderData HealthPack::getRenderData() const
+{
+    RenderData renderData;
+    renderData.position = getPosition();
+    renderData.size = getSize();
+    renderData.color = color;
+    renderData.shape = sprite;
+    renderData.rotation = getRotation();
+    return renderData;
 }

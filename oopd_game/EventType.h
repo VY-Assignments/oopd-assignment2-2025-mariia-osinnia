@@ -5,8 +5,8 @@ enum class EventType {
 	TurnRight,
 	TurnLeft,
 	Stop,
-	Collision,
 	Shoot,
 	GameOver,
+	Victory,
 	None
 };

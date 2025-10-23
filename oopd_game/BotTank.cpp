@@ -1,12 +1,21 @@
 #include "BotTank.h"
-
+#include "EventType.h"
 
 void BotTank::publishEvent(EventType& event)
 {
+    EventManager eventManager = getEventManager();
+    eventManager.notify(event);
 }
 
 void BotTank::update(float deltaTime)
 {
+    Tank::update(deltaTime);
+    if(!isAllive()) {
+        EventType event = EventType::Victory;
+        publishEvent(event);
+        IEventHandler& botTank = *dynamic_cast<IEventHandler*>(this);
+        getEventManager().unsubscribe(botTank);
+    }
 }
 
 RenderData BotTank::getRenderData() const

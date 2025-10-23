@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include "IEntity.h"
 #include "Vector2.h"
 
