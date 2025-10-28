@@ -9,10 +9,10 @@ private:
 	std::string sprite = "rectangle";
 	std::string color = "blue";
 public:
-	HealthPack(Vector2& p, int bonus = 10) : InteractiveObject(p), healthBonus(bonus){}
+	HealthPack(const Vector2& p, int bonus = 10) : InteractiveObject(p), healthBonus(bonus){}
 
 	void onEvent(const EventType& event) override;
-	void publishEvent(EventType& event) override;
+	void publishEvent(const EventType& event) override;
 	void interact(Tank* tank) override;
 	RenderData getRenderData() const override;
 };

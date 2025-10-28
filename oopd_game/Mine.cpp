@@ -5,7 +5,7 @@ void Mine::onEvent(const EventType & event)
 {
 }
 
-void Mine::publishEvent(EventType& event)
+void Mine::publishEvent(const EventType& event)
 {
 }
 

@@ -5,7 +5,7 @@ void HealthPack::onEvent(const EventType & event)
 {
 }
 
-void HealthPack::publishEvent(EventType& event)
+void HealthPack::publishEvent(const EventType& event)
 {
 }
 

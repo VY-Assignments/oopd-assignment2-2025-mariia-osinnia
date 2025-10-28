@@ -10,11 +10,11 @@ private:
 	std::string color = "pink";
 	std::string sprite = "rectangle";
 public:
-	Mine(Vector2& p, int d = 10) : InteractiveObject(p), damage(d){}
+	Mine(const Vector2& p, int d = 10) : InteractiveObject(p), damage(d){}
 
 
 	void onEvent(const EventType& event) override;
-	void publishEvent(EventType& event) override;
+	void publishEvent(const EventType& event) override;
 	void interact(Tank* tank) override;
 	RenderData getRenderData() const override;
 };

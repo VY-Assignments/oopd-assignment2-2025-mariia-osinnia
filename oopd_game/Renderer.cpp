@@ -4,8 +4,8 @@
 void Renderer::draw()
 {
 	window.clear();
-	for (auto obj : renderable) {
-		drawFrame(obj->getRenderData(), window);
+	for (auto& obj : renderable) {
+		drawFrame(std::move(obj->getRenderData()), window); //@todo learn
 	}
 	window.display();
 }

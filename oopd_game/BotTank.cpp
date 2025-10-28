@@ -1,9 +1,10 @@
 #include "BotTank.h"
 #include "EventType.h"
+#include "EntityManager.h"
 
-void BotTank::publishEvent(EventType& event)
+void BotTank::publishEvent(const EventType& event)
 {
-    EventManager eventManager = getEventManager();
+    EventManager& eventManager = getEventManager();
     eventManager.notify(event);
 }
 

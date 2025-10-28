@@ -15,10 +15,10 @@ private:
 	float lifeTime = 5.0f;
 	float age = 0.0f;
 public:
-	InteractiveObject(Vector2& p) : position(p) {}
+	InteractiveObject(const Vector2& p) : position(p) {}
 	void update(float deltaTime) override;
 	virtual void onEvent(const EventType& event) = 0;
-	virtual void publishEvent(EventType& event) = 0;
+	virtual void publishEvent(const EventType& event) = 0;
 	bool isAllive() override { return isAlive; };
 	void onCollision(IEntity* entity) override;
 	virtual void interact(Tank* tank) = 0;

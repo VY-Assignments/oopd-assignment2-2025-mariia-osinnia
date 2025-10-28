@@ -35,18 +35,26 @@ int main() {
 			}
 
 			EventType gameEvent = EventType::None;
-			if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased) {
-				bool isPressed = event.type == sf::Event::KeyPressed;
-
+			if (event.type == sf::Event::KeyPressed) {
 				switch (event.key.code) {
-				case sf::Keyboard::W: gameEvent = isPressed ? EventType::MovingForward : EventType::Stop; break;
-				case sf::Keyboard::S: gameEvent = isPressed ? EventType::MovingBackward : EventType::Stop; break;
-				case sf::Keyboard::A: gameEvent = isPressed ? EventType::TurnLeft : EventType::Stop; break;
-				case sf::Keyboard::D: gameEvent = isPressed ? EventType::TurnRight : EventType::Stop; break;
-				case sf::Keyboard::Space: if (isPressed) gameEvent = EventType::Shoot; break;
+				case sf::Keyboard::W: gameEvent = EventType::MovingForward; break;
+				case sf::Keyboard::S: gameEvent = EventType::MovingBackward; break;
+				case sf::Keyboard::A: gameEvent = EventType::TurnLeft; break;
+				case sf::Keyboard::D: gameEvent = EventType::TurnRight; break;
+				case sf::Keyboard::Space: gameEvent = EventType::Shoot; break;
 				default: break;
 				}
 			}
+			else if (event.type == sf::Event::KeyReleased) {
+				switch (event.key.code) {
+				case sf::Keyboard::W: gameEvent = EventType::StopForward; break;
+				case sf::Keyboard::S: gameEvent = EventType::StopBackward; break;
+				case sf::Keyboard::A: gameEvent = EventType::StopTurnLeft; break;
+				case sf::Keyboard::D: gameEvent = EventType::StopTurnRight; break;
+				default: break;
+				}
+			}
+
 
 			if (gameEvent != EventType::None) {
 				eventManager.notify(gameEvent);
@@ -59,4 +67,6 @@ int main() {
 		renderer.getRenderable();
 		renderer.draw();
 	}
+
+	return 0;
 }

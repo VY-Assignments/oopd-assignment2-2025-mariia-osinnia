@@ -14,35 +14,39 @@ RenderData PlayerTank::getRenderData() const
 void PlayerTank::onEvent(const EventType & event)
 {
     switch (event) {
-    case EventType::MovingForward: 
-        movingForward = true; 
-        movingBackward = false;
-        break;
-    case EventType::MovingBackward: 
-        movingForward = false;
-        movingBackward = true;
-        break;
-    case EventType::TurnRight:
-        turningRight = true;
-        turningLeft = false;
-        break;
-    case EventType::TurnLeft:
-        turningRight = false;
-        turningLeft = true;
-        break;
-    case EventType::Stop:
-        movingForward = false;
-        movingBackward = false;
-        turningRight = false;
-        turningLeft = false;
-        break;
-    case EventType::Shoot:
-        shoot();
-        break;
+        case EventType::MovingForward:  
+            movingForward = true; 
+            break;
+        case EventType::StopForward:    
+            movingForward = false; 
+            break;
+        case EventType::MovingBackward: 
+            movingBackward = true; 
+            break;
+        case EventType::StopBackward:   
+            movingBackward = false; 
+            break;
+        case EventType::TurnLeft:       
+            turningLeft = true; 
+            break;
+        case EventType::StopTurnLeft:   
+            turningLeft = false; 
+            break;
+        case EventType::TurnRight:      
+            turningRight = true; 
+            break;
+        case EventType::StopTurnRight:  
+            turningRight = false; 
+            break;
+        case EventType::Shoot:          
+            shoot(); 
+            break;
+        default: 
+            break;
     }
 }
 
-void PlayerTank::publishEvent(EventType& event)
+void PlayerTank::publishEvent(const EventType& event)
 {
     EventManager eventManager = getEventManager();
     eventManager.notify(event);

@@ -2,6 +2,7 @@
 #include "EventManager.h"
 #include "EntityManager.h"
 #include "IEntityFactory.h"
+#include "CollisionManager.h"
 #include <random>
 
 enum class GameState {
@@ -15,8 +16,10 @@ class GameManager : public IEventHandler
 private:
 	EventManager& eventManager;
 	EntityManager& entityManager;
+
 	IEntityFactory& tankFactory;
 	IEntityFactory& interactiveObjectFactory;
+
 	GameState gameState = GameState::Running;
 	float timeSinceLastMine = 0.0f;
 	float timeSinceLastHealthPack = 0.0f;
@@ -38,6 +41,6 @@ public:
 	GameState getGameState() { return gameState; }
 
 	void onEvent(const EventType& event) override;
-	void publishEvent(EventType& event) override;
+	void publishEvent(const EventType& event) override;
 };
 

@@ -3,7 +3,7 @@
 #include "PlayerTank.h"
 #include "BotTank.h"
 
-std::unique_ptr<IEntity> TankFactory::create(std::string& type, Vector2 & position)
+std::unique_ptr<IEntity> TankFactory::create(const std::string& type, const Vector2& position)
 {
     TankType tankType = parseType(type);
     if (tankType == PLAYER_TANK) {
@@ -18,7 +18,7 @@ std::unique_ptr<IEntity> TankFactory::create(std::string& type, Vector2 & positi
     }
 }
 
-TankType TankFactory::parseType(std::string& type)
+TankType TankFactory::parseType(const std::string& type)
 {
     if (type == "player") {
         return PLAYER_TANK;

@@ -17,8 +17,11 @@ void GameManager::init() {
 	eventManager.subscribe(EventType::MovingBackward, dynamic_cast<IEventHandler*>(playerTank.get()));
 	eventManager.subscribe(EventType::TurnLeft, dynamic_cast<IEventHandler*>(playerTank.get()));
 	eventManager.subscribe(EventType::TurnRight, dynamic_cast<IEventHandler*>(playerTank.get()));
-	eventManager.subscribe(EventType::Stop, dynamic_cast<IEventHandler*>(playerTank.get()));
-	eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventHandler*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopForward, dynamic_cast<IEventHandler*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopBackward, dynamic_cast<IEventHandler*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopTurnLeft, dynamic_cast<IEventHandler*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopTurnRight, dynamic_cast<IEventHandler*>(playerTank.get()));
+    eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventHandler*>(playerTank.get()));
 	entityManager.addEntity(std::move(playerTank));
 
 	Vector2 botPosition = { 960, 360 };
@@ -34,7 +37,6 @@ void GameManager::init() {
 void GameManager::update(float deltaTime)
 {
     if (gameState != GameState::Running) {
-        IEventHandler& gameManager = *dynamic_cast<IEventHandler*>(this);
         return;
     }
 
@@ -85,6 +87,7 @@ void GameManager::onEvent(const EventType& event)
     }
 }
 
-void GameManager::publishEvent(EventType& event)
+void GameManager::publishEvent(const EventType& event)
 {
 }
+

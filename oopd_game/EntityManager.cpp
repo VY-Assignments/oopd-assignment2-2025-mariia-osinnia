@@ -25,3 +25,13 @@ void EntityManager::updateAll(float deltaTime)
 		return !e->isAllive();
 		}), entities.end());
 }
+
+PlayerTank* EntityManager::getPlayer()
+{
+	for (auto& entity : entities) {
+		if (PlayerTank* player = dynamic_cast<PlayerTank*>(entity.get())) {
+			return player;
+		}
+	}
+	return nullptr;
+}

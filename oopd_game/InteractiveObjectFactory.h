@@ -1,6 +1,7 @@
 #pragma once
 #include "IEntityFactory.h"
 #include "Vector2.h"
+#include <string>
 
 enum InteractiveObjectType {
 	MINE,
@@ -10,7 +11,7 @@ enum InteractiveObjectType {
 class InteractiveObjectFactory : public IEntityFactory
 {
 private:
-	std::unique_ptr<IEntity> create(std::string& type, Vector2& position) override;
-	static InteractiveObjectType parseType(std::string& type);
+	std::unique_ptr<IEntity> create(const std::string& type, const Vector2& position) override;
+	static InteractiveObjectType parseType(const std::string& type);
 };
 

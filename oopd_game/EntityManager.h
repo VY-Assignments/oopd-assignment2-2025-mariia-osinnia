@@ -5,6 +5,7 @@
 #include "Tank.h"
 #include "Projectile.h"
 #include "InteractiveObject.h"
+#include "PlayerTank.h"
 
 class EntityManager
 {
@@ -16,5 +17,6 @@ public:
 	std::vector<std::unique_ptr<IEntity>>& getEntities();
 	void clear();
 	void updateAll(float deltaTime);
+	PlayerTank* getPlayer();
 };
 

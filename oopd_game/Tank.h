@@ -23,11 +23,11 @@ private:
 	float fireCooldown = 0.5f;
 	float timeSinceLastShot = fireCooldown;
 public:
-	Tank(EntityManager& entityM, EventManager& eventM, Vector2& p) : entityManager(entityM), eventManager(eventM), position(p) {}
+	Tank(EntityManager& entityM, EventManager& eventM, const Vector2& p) : entityManager(entityM), eventManager(eventM), position(p) {}
 
 	virtual RenderData getRenderData() const = 0;
 	virtual void onEvent(const EventType& event) = 0;
-	virtual void publishEvent(EventType& event) = 0;
+	virtual void publishEvent(const EventType& event) = 0;
 	virtual void update(float deltaTime) = 0;
 	void shoot();
 	void takeDamage(int damage);
@@ -51,6 +51,7 @@ public:
 	void setRotationSpeed(float rSpeed) { rotation = rSpeed; }
 
 	EventManager& getEventManager() { return eventManager; }
+	EntityManager& getEntityManager() { return entityManager; }
 
 	bool isAllive() override { return isAlive; };
 };

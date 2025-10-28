@@ -3,7 +3,7 @@
 #include "HealthPack.h"
 #include <iostream>
 
-std::unique_ptr<IEntity> InteractiveObjectFactory::create(std::string& type, Vector2 & position)
+std::unique_ptr<IEntity> InteractiveObjectFactory::create(const std::string& type, const Vector2 & position)
 {
 	InteractiveObjectType objectType = parseType(type);
 	if (objectType == MINE) {
@@ -18,7 +18,7 @@ std::unique_ptr<IEntity> InteractiveObjectFactory::create(std::string& type, Vec
 	}
 }
 
-InteractiveObjectType InteractiveObjectFactory::parseType(std::string& type)
+InteractiveObjectType InteractiveObjectFactory::parseType(const std::string& type)
 {
 	if (type == "mine") {
 		return MINE;
