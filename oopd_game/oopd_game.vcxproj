@@ -174,6 +174,7 @@
     <ClInclude Include="Mine.h" />
     <ClInclude Include="PlayerTank.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Tank.h" />

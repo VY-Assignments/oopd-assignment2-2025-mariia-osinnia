@@ -15,7 +15,7 @@ int main() {
 
 	EntityManager entityManager;
 	EventManager eventManager;
-	Renderer renderer(window, entityManager);
+	Renderer renderer(window, entityManager, eventManager);
 
 	TankFactory tankF(entityManager, eventManager);
 	InteractiveObjectFactory interactiveObjectF;
@@ -33,32 +33,7 @@ int main() {
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
-
-			EventType gameEvent = EventType::None;
-			if (event.type == sf::Event::KeyPressed) {
-				switch (event.key.code) {
-				case sf::Keyboard::W: gameEvent = EventType::MovingForward; break;
-				case sf::Keyboard::S: gameEvent = EventType::MovingBackward; break;
-				case sf::Keyboard::A: gameEvent = EventType::TurnLeft; break;
-				case sf::Keyboard::D: gameEvent = EventType::TurnRight; break;
-				case sf::Keyboard::Space: gameEvent = EventType::Shoot; break;
-				default: break;
-				}
-			}
-			else if (event.type == sf::Event::KeyReleased) {
-				switch (event.key.code) {
-				case sf::Keyboard::W: gameEvent = EventType::StopForward; break;
-				case sf::Keyboard::S: gameEvent = EventType::StopBackward; break;
-				case sf::Keyboard::A: gameEvent = EventType::StopTurnLeft; break;
-				case sf::Keyboard::D: gameEvent = EventType::StopTurnRight; break;
-				default: break;
-				}
-			}
-
-
-			if (gameEvent != EventType::None) {
-				eventManager.notify(gameEvent);
-			}
+			renderer.handleInput(event);
 		}
 
 		gameManager.update(deltaTime);
