@@ -7,7 +7,7 @@ class Projectile : public IEntity, public IRenderable
 {
 private:
 	int damage = 10;
-	float speed = 600.0f;
+	float speed = 800.0f;
 	Vector2 direction = {0, 0};
 	float rotation = 0.0f;
 	Vector2 position = { 0, 0 };
@@ -23,7 +23,7 @@ public:
 	void update(float deltaTime) override;
 	RenderData getRenderData() const override;
 	bool isAllive() override { return isAlive; };
-	void onCollision(IEntity* entity) override;
+	void onCollision(ICollidable* other) override;
 
 
 	Vector2 getPosition() const override { return position; }

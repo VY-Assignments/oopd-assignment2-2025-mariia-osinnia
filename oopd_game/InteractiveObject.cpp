@@ -9,9 +9,9 @@ void InteractiveObject::update(float deltaTime)
 	}
 }
 
-void InteractiveObject::onCollision(IEntity* entity)
+void InteractiveObject::onCollision(ICollidable* other)
 {
-	if (Tank* tank = dynamic_cast<Tank*>(entity)) {
+	if (Tank* tank = dynamic_cast<Tank*>(other)) {
 		interact(tank);
 		isAlive = false;
 	}

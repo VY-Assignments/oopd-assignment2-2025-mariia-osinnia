@@ -9,13 +9,14 @@
 #include "CollisionManager.h"
 
 int main() {
-	int windowWidth = 1280, windowHeight = 720;
+	int windowWidth = 960, windowHeight = 720;
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Tanks Game");
 	sf::Clock clock;
 
+	Map map;
 	EntityManager entityManager;
 	EventManager eventManager;
-	Renderer renderer(window, entityManager, eventManager);
+	Renderer renderer(window, entityManager, eventManager, map);
 
 	TankFactory tankF(entityManager, eventManager);
 	InteractiveObjectFactory interactiveObjectF;
@@ -23,7 +24,7 @@ int main() {
 	IEntityFactory& interactiveObjectFactory = interactiveObjectF;
 
 	GameManager gameManager(eventManager, entityManager, tankFactory, interactiveObjectFactory);
-	CollisionManager collisionManager(entityManager);
+	CollisionManager collisionManager(entityManager, map);
 
 	sf::Event event;
 

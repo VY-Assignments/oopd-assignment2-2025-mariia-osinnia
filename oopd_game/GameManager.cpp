@@ -9,7 +9,7 @@
 #include <random>
 
 void GameManager::init() {
-	Vector2 playerPosition = { 320, 360 };
+	Vector2 playerPosition = { 70, 410 };
 	std::string type = "player";
 	std::unique_ptr<IEntity> playerTank = tankFactory.create(type, playerPosition);
 	PlayerTank* playerPtr = dynamic_cast<PlayerTank*>(playerTank.get());
@@ -24,7 +24,7 @@ void GameManager::init() {
     eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventHandler*>(playerTank.get()));
 	entityManager.addEntity(std::move(playerTank));
 
-	Vector2 botPosition = { 960, 360 };
+	Vector2 botPosition = { 890, 410 };
 	std::string type1 = "bot";
 	std::unique_ptr<IEntity> botTank = tankFactory.create(type1, botPosition);
 	BotTank* botPtr = dynamic_cast<BotTank*>(botTank.get());
@@ -68,7 +68,7 @@ void GameManager::reset()
 
 Vector2 GameManager::getRandomPosition()
 {
-    const float MAP_WIDTH = 1280.0f;
+    const float MAP_WIDTH = 960.0f;
     const float MAP_HEIGHT = 720.0f;
     const float MARGIN = 50.0f;
     const float UI_HEIGHT = 100.0f;

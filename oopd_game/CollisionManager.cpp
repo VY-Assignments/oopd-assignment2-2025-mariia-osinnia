@@ -6,13 +6,13 @@
 
 void CollisionManager::checkCollision()
 {
-    std::vector<std::unique_ptr<IEntity>>& entities = entityManager.getEntities();
+    getCollidable(); 
     const float PI = 3.1415926f;
 
-    for (size_t i = 0; i < entities.size(); ++i) {
-        for (size_t j = i + 1; j < entities.size(); ++j) {
-            IEntity* a = entities[i].get();
-            IEntity* b = entities[j].get();
+    for (size_t i = 0; i < collidable.size(); ++i) {
+        for (size_t j = i + 1; j < collidable.size(); ++j) {
+            ICollidable* a = collidable[i];
+            ICollidable* b = collidable[j];
 
             float radA = a->getRotation() * PI / 180.0f;
             float radB = b->getRotation() * PI / 180.0f;
@@ -53,6 +53,21 @@ bool CollisionManager::checkOBB(const Vector2& position1, const Vector2& size1, 
     }
 
     return true;
+}
+
+void CollisionManager::getCollidable()
+{
+    collidable.clear();
+    std::vector<std::unique_ptr<IEntity>>& entities = entityManager.getEntities();
+    for (auto& entity : entities) {
+        if (ICollidable* c = dynamic_cast<ICollidable*>(entity.get())) {
+            collidable.push_back(c);
+        }
+    }
+    const std::vector<std::unique_ptr<ICollidable>>& obstacles = map.getObstacles();
+    for (auto& ob : obstacles) {
+        collidable.push_back(ob.get());
+    }
 }
 
 

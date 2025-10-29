@@ -20,7 +20,7 @@ public:
 	virtual void onEvent(const EventType& event) = 0;
 	virtual void publishEvent(const EventType& event) = 0;
 	bool isAllive() override { return isAlive; };
-	void onCollision(IEntity* entity) override;
+	void onCollision(ICollidable* other) override;
 	virtual void interact(Tank* tank) = 0;
 
 	Vector2 getPosition() const override { return position; };

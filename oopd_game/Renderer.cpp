@@ -84,11 +84,16 @@ void Renderer::handleInput(sf::Event& event)
 void Renderer::getRenderable()
 {
 	renderable.clear();
-	const auto& entities = entityManager.getEntities();
-	for (const auto& e : entities) {
-		if (IRenderable* r = dynamic_cast<IRenderable*>(e.get())) {
+	const std::vector<std::unique_ptr<IEntity>>& entities = entityManager.getEntities();
+	for (const auto& entity : entities) {
+		if (IRenderable* r = dynamic_cast<IRenderable*>(entity.get())) {
 			renderable.push_back(r);
 		}
+	}
+	const std::vector<std::unique_ptr<ICollidable>>& obstacles = map.getObstacles();
+	for (const auto& obstacle : map.getObstacles()) {
+		IRenderable* r = dynamic_cast<IRenderable*>(obstacle.get());
+		renderable.push_back(r);
 	}
 }
 

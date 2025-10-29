@@ -4,6 +4,7 @@
 #include "IEventHandler.h"
 #include "Vector2.h"
 #include "EventManager.h"
+#include "ICollidable.h"
 class EntityManager;
 
 class Tank : public IEntity, public IRenderable, public IEventHandler
@@ -18,9 +19,9 @@ private:
 	Vector2 size = { 30, 30 };
 	float speed = 150.0f;
 	float rotation = 0.0f;
-	float rotationSpeed = 100.0f;
+	float rotationSpeed = 75.0f;
 
-	float fireCooldown = 0.5f;
+	float fireCooldown = 0.3f;
 	float timeSinceLastShot = fireCooldown;
 public:
 	Tank(EntityManager& entityM, EventManager& eventM, const Vector2& p) : entityManager(entityM), eventManager(eventM), position(p) {}
@@ -32,7 +33,7 @@ public:
 	void shoot();
 	void takeDamage(int damage);
 	void heal(int healBonus);
-	void onCollision(IEntity* entity) override;
+	void onCollision(ICollidable* other) override;
 
 	Vector2 getPosition() const override { return position; }
 	void setPosition(const Vector2& pos) { position = pos; }
