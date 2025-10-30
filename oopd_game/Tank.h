@@ -15,6 +15,7 @@ private:
 	EntityManager& entityManager;
 	EventManager& eventManager;
 	Vector2 position = {0, 0};
+	Vector2 previousPosition;
 	Vector2 direction = {0, 0};
 	Vector2 size = { 30, 30 };
 	float speed = 150.0f;
@@ -48,7 +49,7 @@ public:
 	float getRotation() const override { return rotation; }
 	void setRotation(float r) { rotation = r; }
 
-	float getRotationSpeed() { return rotationSpeed; }
+	float getRotationSpeed() const { return rotationSpeed; }
 	void setRotationSpeed(float rSpeed) { rotation = rSpeed; }
 
 	EventManager& getEventManager() { return eventManager; }

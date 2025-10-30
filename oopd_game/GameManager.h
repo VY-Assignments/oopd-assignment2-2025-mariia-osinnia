@@ -27,6 +27,8 @@ private:
 	float healthPackSpawnInterval = 7.0f;
 	std::mt19937 rng;
 
+	bool shouldReset = false;
+
 public:
 	GameManager(EventManager& eventM, EntityManager& entityM, IEntityFactory& tankF, 
 		IEntityFactory& interactiveObjF) : eventManager(eventM), entityManager(entityM), tankFactory(tankF), 
@@ -38,7 +40,9 @@ public:
 	void reset();
 
 	Vector2 getRandomPosition();
-	GameState getGameState() { return gameState; }
+	GameState getGameState() const { return gameState; }
+	bool getShouldReset() const { return shouldReset; }
+	void setShouldReset(bool shouldR) { shouldReset = shouldR; }
 
 	void onEvent(const EventType& event) override;
 	void publishEvent(const EventType& event) override;

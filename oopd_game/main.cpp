@@ -42,6 +42,11 @@ int main() {
 		collisionManager.checkCollision();
 		renderer.getRenderable();
 		renderer.draw();
+
+		if (gameManager.getShouldReset()) {
+			gameManager.reset();
+			gameManager.setShouldReset(false);
+		}
 	}
 
 	return 0;

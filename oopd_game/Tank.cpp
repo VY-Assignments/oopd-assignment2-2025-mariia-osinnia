@@ -2,7 +2,6 @@
 #include "Projectile.h"
 #include "EntityManager.h" 
 #include "Obstacle.h"
-#include <iostream>
 
 void Tank::update(float deltaTime)
 {
@@ -37,7 +36,22 @@ void Tank::heal(int healBonus)
 void Tank::onCollision(ICollidable* other)
 {
 	if (Obstacle* obstacle = dynamic_cast<Obstacle*>(other)) {
-		position -= direction * speed * 0.01f;
+        Vector2 oPos = obstacle->getPosition();
+        Vector2 oSize = obstacle->getSize();
+        Vector2 tSize = getSize();
+
+        Vector2 diff = position - oPos;
+
+        float dx = (tSize.x / 2 + oSize.x / 2) - std::abs(diff.x);
+        float dy = (tSize.y / 2 + oSize.y / 2) - std::abs(diff.y);
+
+        if (dx > 0 && dy > 0) {
+            if (dx < dy) {
+                position.x += (diff.x > 0 ? dx : -dx);
+            } else {
+                position.y += (diff.y > 0 ? dy : -dy);
+            }
+        }
 	}
 }
 

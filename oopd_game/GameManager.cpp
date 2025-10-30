@@ -81,9 +81,11 @@ void GameManager::onEvent(const EventType& event)
 {
     if(event == EventType::GameOver) {
         gameState = GameState::GameOver;
+        shouldReset = true;
     }
     else if (event == EventType::Victory) {
         gameState = GameState::Victory;
+        shouldReset = true;
     }
 }
 

@@ -10,7 +10,7 @@ private:
 	std::string color = "pink";
 	std::string sprite = "rectangle";
 public:
-	Mine(const Vector2& p, int d = 10) : InteractiveObject(p), damage(d){}
+	Mine(const Vector2& p, int d = 100) : InteractiveObject(p), damage(d){}
 
 
 	void onEvent(const EventType& event) override;
