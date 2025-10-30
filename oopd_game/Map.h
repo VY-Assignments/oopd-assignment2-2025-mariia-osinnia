@@ -9,7 +9,22 @@ private:
 public:
 	Map() {
 		obstacles.push_back(std::make_unique<Obstacle>(
-			Vector2{ 200, 300 }, Vector2{ 200, 30 }
+			Vector2{ 10, 430 }, Vector2{ 20, 660 }
+		));
+		obstacles.push_back(std::make_unique<Obstacle>(
+			Vector2{ 950, 430 }, Vector2{ 20, 660 }
+		));
+		obstacles.push_back(std::make_unique<Obstacle>(
+			Vector2{ 480, 110 }, Vector2{ 920, 20 }
+		));
+		obstacles.push_back(std::make_unique<Obstacle>(
+			Vector2{ 480, 710 }, Vector2{ 920, 20 }
+		));
+		obstacles.push_back(std::make_unique<Obstacle>(
+			Vector2{ 200, 400 }, Vector2{ 20, 200 }
+		));
+		obstacles.push_back(std::make_unique<Obstacle>(
+			Vector2{ 760, 400 }, Vector2{ 20, 200 }
 		));
 	}
 	const std::vector<std::unique_ptr<ICollidable>>& getObstacles() const {
