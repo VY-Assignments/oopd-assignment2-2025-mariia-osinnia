@@ -19,8 +19,7 @@ RenderData HealthPack::getRenderData() const
     RenderData renderData;
     renderData.position = getPosition();
     renderData.size = getSize();
-    renderData.color = color;
-    renderData.shape = sprite;
+    renderData.type = type;
     renderData.rotation = getRotation();
     return renderData;
 }

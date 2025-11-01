@@ -15,16 +15,15 @@ RenderData Projectile::getRenderData() const
 {
 	RenderData renderData;
 	renderData.position = position;
-	renderData.shape = sprite;
+	renderData.type = type;
 	renderData.size = size;
-	renderData.color = color;
+	renderData.rotation = rotation;
 	return renderData;
 }
 
 void Projectile::onCollision(ICollidable* other)
 {
-	if (Tank* tank = dynamic_cast<Tank*>(other)) {
-		tank->takeDamage(damage);
+	if (Tank* tank = dynamic_cast<Tank*>(other) ) {
 		isAlive = false;
 	}
 	else if (Obstacle* obstacle = dynamic_cast<Obstacle*>(other)) {

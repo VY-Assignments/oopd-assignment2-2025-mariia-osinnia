@@ -17,7 +17,7 @@ private:
 	Vector2 position = {0, 0};
 	Vector2 previousPosition;
 	Vector2 direction = {0, 0};
-	Vector2 size = { 30, 30 };
+	Vector2 size = { 30, 40 };
 	float speed = 150.0f;
 	float rotation = 0.0f;
 	float rotationSpeed = 75.0f;

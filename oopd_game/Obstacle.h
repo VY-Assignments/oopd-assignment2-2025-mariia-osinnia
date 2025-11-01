@@ -7,8 +7,7 @@ class Obstacle : public IRenderable, public ICollidable
 private:
 	Vector2 position = { 0, 0 };
 	Vector2 size = { 1, 1 };
-	std::string color = "white";
-	std::string shape = "rectangle";
+	std::string type = "obstacle";
 	float rotation = 0.0f;
 public:
 	Obstacle(const Vector2& p, const Vector2& s) : position(p), size(s) {}

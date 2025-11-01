@@ -5,8 +5,7 @@ RenderData PlayerTank::getRenderData() const
     RenderData renderData;
     renderData.position = getPosition();
     renderData.size = getSize();
-    renderData.color = color;
-    renderData.shape = sprite;
+    renderData.type = type;
     renderData.rotation = getRotation();
     return renderData;
 }
@@ -79,7 +78,7 @@ void PlayerTank::update(float deltaTime)
     float speed = getSpeed();
     Vector2 position = getPosition();
 
-    Vector2 direction = { std::cos(radRotation), std::sin(radRotation) };
+    Vector2 direction = { std::sin(radRotation), -std::cos(radRotation) };
     setDirection(direction);
     if (movingForward) {
         position += direction * speed * deltaTime;

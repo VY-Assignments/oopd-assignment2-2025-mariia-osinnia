@@ -7,8 +7,7 @@ class Mine : public InteractiveObject
 {
 private:
 	int damage = 100;
-	std::string color = "pink";
-	std::string sprite = "rectangle";
+	std::string type = "mine";
 public:
 	Mine(const Vector2& p, int d = 100) : InteractiveObject(p), damage(d){}
 

@@ -5,8 +5,7 @@
 class BotTank : public Tank
 {
 private:
-	std::string sprite = "rectangle";
-	std::string color = "red";
+	std::string type = "botTank";
 	PlayerTank* targetPlayer = nullptr;
 public:
 	BotTank(EntityManager& entityM, EventManager& eventM, const Vector2& position) : Tank(entityM, eventM, position) {}

@@ -6,8 +6,7 @@ class HealthPack : public InteractiveObject
 {
 private:
 	int healthBonus = 10;
-	std::string sprite = "rectangle";
-	std::string color = "blue";
+	std::string type = "healthPack";
 public:
 	HealthPack(const Vector2& p, int bonus = 10) : InteractiveObject(p), healthBonus(bonus){}
 

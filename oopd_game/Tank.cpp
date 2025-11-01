@@ -14,11 +14,11 @@ void Tank::update(float deltaTime)
 void Tank::shoot()
 {
 	if (timeSinceLastShot >= fireCooldown) {
-		float tankHalfLength = size.x / 2;
+		float tankHalfLength = size.y / 2;
 		float projectileOffset = 5.0f;
 		Vector2 projectileSpawn = position + direction * (tankHalfLength + projectileOffset);
 
-		entityManager.addEntity(std::make_unique<Projectile>(projectileSpawn, direction));
+		entityManager.addEntity(std::make_unique<Projectile>(projectileSpawn, direction, rotation));
 		timeSinceLastShot = 0.0f;
 	}
 }
@@ -52,6 +52,9 @@ void Tank::onCollision(ICollidable* other)
                 position.y += (diff.y > 0 ? dy : -dy);
             }
         }
+	}
+	else if (Projectile* p = dynamic_cast<Projectile*>(other)) {
+		takeDamage(p->getDamage());
 	}
 }
 

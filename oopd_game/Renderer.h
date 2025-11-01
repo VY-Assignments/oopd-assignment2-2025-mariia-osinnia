@@ -4,6 +4,16 @@
 #include "EventManager.h"
 #include "IRenderable.h"
 #include "Map.h"
+
+enum class EntityTypes {
+	PlayerTank,
+	BotTank,
+	HealthPack,
+	Mine,
+	Obstacle,
+	Projectile,
+	Unknown
+};
 class Renderer
 {
 private:
@@ -12,14 +22,23 @@ private:
 	EventManager& eventManager;
 	std::vector<IRenderable*> renderable;
 	Map& map;
+
+	sf::Texture playerTankTexture;
+	sf::Texture botTankTexture;
+	sf::Texture projectileTexture;
 public:
 	Renderer(sf::RenderWindow& win, EntityManager& entityM, EventManager& eventM, Map& m) : window(win), 
-		entityManager(entityM), eventManager(eventM), map(m) {}
+		entityManager(entityM), eventManager(eventM), map(m) {
+		playerTankTexture.loadFromFile("Textures/player_tank.png");
+		botTankTexture.loadFromFile("Textures/bot_tank.png");
+		projectileTexture.loadFromFile("Textures/projectile.png");
+	}
 	void draw();
 	void drawFrame(const RenderData& renderData, sf::RenderWindow& window);
 	void handleInput(sf::Event& event);
 	void getRenderable();
     void drawVictoryScreen();
 	void drawGameOverScreen();
+	EntityTypes stringToEntityType(std::string& type);
 };
 

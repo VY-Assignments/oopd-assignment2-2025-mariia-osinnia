@@ -4,8 +4,7 @@
 class PlayerTank : public Tank
 {
 private:
-	std::string sprite = "rectangle";
-	std::string color = "green";
+	std::string type = "playerTank";
 	bool movingForward = false;
 	bool movingBackward = false;
 	bool turningRight = false;

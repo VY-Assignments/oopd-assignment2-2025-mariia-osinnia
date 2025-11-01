@@ -7,8 +7,8 @@ class CollisionManager
 {
 private:
 	EntityManager& entityManager;
-	std::vector<ICollidable*> collidable;
 	Map& map;
+	std::vector<ICollidable*> collidable;
 public:
 	CollisionManager(EntityManager& entityM, Map& m) : entityManager(entityM), map(m) {}
 	void checkCollision();

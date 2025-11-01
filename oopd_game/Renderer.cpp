@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "IRenderable.h"
+#include <iostream>
 
 void Renderer::draw()
 {
@@ -12,27 +13,37 @@ void Renderer::draw()
 
 void Renderer::drawFrame(const RenderData& renderData, sf::RenderWindow& window)
 {
-	if (renderData.shape == "rectangle") {
-		sf::RectangleShape rect;
-		rect.setOrigin(renderData.size.x / 2, renderData.size.y / 2);
-		rect.setPosition(renderData.position.x, renderData.position.y);
-		rect.setSize({ renderData.size.x, renderData.size.y });
-		std::string color = renderData.color;
-		if (color == "yellow"){
-			rect.setFillColor(sf::Color::Yellow);
-		}
-		else if (color == "green") {
-			rect.setFillColor(sf::Color::Green);
-		}
-		else if (color == "pink") {
+	sf::RectangleShape rect;
+	rect.setOrigin(renderData.size.x / 2, renderData.size.y / 2);
+	rect.setPosition(renderData.position.x, renderData.position.y);
+	rect.setSize({ renderData.size.x, renderData.size.y });
+	rect.setRotation(renderData.rotation);
+	std::string type = renderData.type;
+	EntityTypes entityType = stringToEntityType(type);
+	switch (entityType) {
+		case EntityTypes::PlayerTank:
+			rect.setTexture(&playerTankTexture);
+			break;
+		case EntityTypes::BotTank:
+			rect.setTexture(&botTankTexture);
+			break;
+		case EntityTypes::HealthPack:
 			rect.setFillColor(sf::Color::Magenta);
-		}
-		else if (color == "blue") {
+			break;
+		case EntityTypes::Mine:
 			rect.setFillColor(sf::Color::Blue);
-		}
-		rect.setRotation(renderData.rotation);
-		window.draw(rect);
+			break;
+		case EntityTypes::Obstacle:
+			rect.setFillColor(sf::Color::White);
+			break;
+		case EntityTypes::Projectile:
+			rect.setTexture(&projectileTexture);
+			break;
+		case EntityTypes::Unknown:
+			rect.setFillColor(sf::Color::White);
+			break;
 	}
+	window.draw(rect);
 }
 
 void Renderer::handleInput(sf::Event& event)
@@ -130,5 +141,31 @@ void Renderer::drawGameOverScreen()
 	window.draw(text);
 	window.display();
 }
+
+EntityTypes Renderer::stringToEntityType(std::string& type)
+{
+	if (type == "playerTank") {
+		return EntityTypes::PlayerTank;
+	}
+	else if (type == "botTank") {
+		return EntityTypes::BotTank;
+	}
+	else if (type == "mine") {
+		return EntityTypes::Mine;
+	}
+	else if (type == "healthPack") {
+		return EntityTypes::HealthPack;
+	}
+	else if (type == "obstacle") {
+		return EntityTypes::Obstacle;
+	}
+	else if (type == "projectile") {
+		return EntityTypes::Projectile;
+	}
+	else {
+		return EntityTypes::Unknown;
+	}
+}
+
 
 

@@ -5,8 +5,7 @@ RenderData Obstacle::getRenderData() const
     RenderData renderData;
     renderData.position = position;
     renderData.size = size;
-    renderData.shape = shape;
-    renderData.color = color;
+    renderData.type = type;
     return renderData;
 }
 
