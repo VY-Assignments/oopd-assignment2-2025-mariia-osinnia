@@ -19,6 +19,18 @@ void BotTank::update(float deltaTime)
     }
 }
 
+void BotTank::findPlayer()
+{
+    EntityManager& entityManager = getEntityManager();
+    std::vector<std::unique_ptr<IEntity>>& entities = entityManager.getEntities();
+    for (auto& entity : entities) {
+        if (PlayerTank* playerTank = dynamic_cast<PlayerTank*>(entity.get())) {
+            targetPlayer = playerTank;
+            break;
+        }
+    }
+}
+
 RenderData BotTank::getRenderData() const
 {
     RenderData renderData;

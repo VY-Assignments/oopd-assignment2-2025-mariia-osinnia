@@ -70,10 +70,11 @@ Vector2 GameManager::getRandomPosition()
 {
     const float MAP_WIDTH = 960.0f;
     const float MAP_HEIGHT = 720.0f;
-    const float MARGIN = 50.0f;
-    const float UI_HEIGHT = 100.0f;
-    std::uniform_real_distribution<float> distX(MARGIN, MAP_WIDTH - MARGIN);
-    std::uniform_real_distribution<float> distY(UI_HEIGHT, MAP_HEIGHT - MARGIN);
+    const float MARGIN_X = 200.0f;
+    const float MARGIN_Y = 50.0f;
+    const float UI_HEIGHT = 150.0f;
+    std::uniform_real_distribution<float> distX(MARGIN_X, MAP_WIDTH - MARGIN_X);
+    std::uniform_real_distribution<float> distY(UI_HEIGHT, MAP_HEIGHT - MARGIN_Y);
     return Vector2{ distX(rng), distY(rng) };
 }
 
