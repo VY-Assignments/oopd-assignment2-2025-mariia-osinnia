@@ -29,6 +29,7 @@ void GameManager::init() {
 	std::unique_ptr<IEntity> botTank = tankFactory.create(type1, botPosition);
 	BotTank* botPtr = dynamic_cast<BotTank*>(botTank.get());
 	botPtr->setTarget(playerPtr);
+    botPtr->setMap(map);
 	entityManager.addEntity(std::move(botTank));
 
 	eventManager.subscribe(EventType::GameOver, dynamic_cast<IEventHandler*>(this));
@@ -70,11 +71,11 @@ Vector2 GameManager::getRandomPosition()
 {
     const float MAP_WIDTH = 960.0f;
     const float MAP_HEIGHT = 720.0f;
-    const float MARGIN_X = 200.0f;
-    const float MARGIN_Y = 50.0f;
-    const float UI_HEIGHT = 150.0f;
-    std::uniform_real_distribution<float> distX(MARGIN_X, MAP_WIDTH - MARGIN_X);
-    std::uniform_real_distribution<float> distY(UI_HEIGHT, MAP_HEIGHT - MARGIN_Y);
+    const float MARGIN_TOP = 250.0f;
+    const float MARGIN_BOTTOM = 170.0f;
+    const float MARGIN_SIDES = 230.0f;
+    std::uniform_real_distribution<float> distX(MARGIN_SIDES, MAP_WIDTH - MARGIN_SIDES);
+    std::uniform_real_distribution<float> distY(MARGIN_TOP, MAP_HEIGHT - MARGIN_BOTTOM);
     return Vector2{ distX(rng), distY(rng) };
 }
 

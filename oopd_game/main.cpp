@@ -23,11 +23,10 @@ int main() {
 	IEntityFactory& tankFactory = tankF;
 	IEntityFactory& interactiveObjectFactory = interactiveObjectF;
 
-	GameManager gameManager(eventManager, entityManager, tankFactory, interactiveObjectFactory);
+	GameManager gameManager(eventManager, entityManager, tankFactory, interactiveObjectFactory, &map);
 	CollisionManager collisionManager(entityManager, map);
 
 	sf::Event event;
-
 	while (window.isOpen()) {
 		float deltaTime = clock.restart().asSeconds();
 		while (window.pollEvent(event)) {
@@ -38,11 +37,12 @@ int main() {
 		}
 
 		gameManager.update(deltaTime);
-		entityManager.updateAll(deltaTime);
-		collisionManager.checkCollision();
+
 		renderer.getRenderable();
 		renderer.draw();
 
+		entityManager.updateAll(deltaTime);
+		collisionManager.checkCollision();
 		if (gameManager.getShouldReset()) {
 			gameManager.reset();
 			gameManager.setShouldReset(false);

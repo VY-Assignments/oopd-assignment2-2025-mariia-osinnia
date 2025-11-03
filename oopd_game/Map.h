@@ -26,6 +26,12 @@ public:
 		obstacles.push_back(std::make_unique<Obstacle>(
 			Vector2{ 760, 400 }, Vector2{ 20, 200 }
 		));
+		obstacles.push_back(std::make_unique<Obstacle>(
+			Vector2{ 480, 220 }, Vector2{ 300, 20 }
+		));
+		obstacles.push_back(std::make_unique<Obstacle>(
+			Vector2{ 480, 580 }, Vector2{ 300, 20 }
+		));
 	}
 	const std::vector<std::unique_ptr<ICollidable>>& getObstacles() const {
 		return obstacles;

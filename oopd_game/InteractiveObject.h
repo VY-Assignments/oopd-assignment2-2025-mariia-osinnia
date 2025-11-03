@@ -5,20 +5,18 @@
 #include "IRenderable.h"
 class Tank;
 
-class InteractiveObject : public IEntity, public IEventHandler, public IRenderable
+class InteractiveObject : public IEntity, public IRenderable
 {
 private:
 	Vector2 position{0,0};
 	float rotation = 0;
-	Vector2 size{10,10};
+	Vector2 size{25,25};
 	bool isAlive = true;
 	float lifeTime = 5.0f;
 	float age = 0.0f;
 public:
 	InteractiveObject(const Vector2& p) : position(p) {}
 	void update(float deltaTime) override;
-	virtual void onEvent(const EventType& event) = 0;
-	virtual void publishEvent(const EventType& event) = 0;
 	bool isAllive() override { return isAlive; };
 	void onCollision(ICollidable* other) override;
 	virtual void interact(Tank* tank) = 0;

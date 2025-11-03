@@ -4,9 +4,14 @@
 
 void Renderer::draw()
 {
+	PlayerTank* playerTank = entityManager.getPlayer();
+	BotTank* botTank = entityManager.getBot();
 	window.clear();
 	for (auto& obj : renderable) {
 		drawFrame(std::move(obj->getRenderData()), window); //@todo learn
+	}
+	if (playerTank && botTank) {
+		drawHUD(playerTank, botTank);
 	}
 	window.display();
 }
@@ -28,10 +33,10 @@ void Renderer::drawFrame(const RenderData& renderData, sf::RenderWindow& window)
 			rect.setTexture(&botTankTexture);
 			break;
 		case EntityTypes::HealthPack:
-			rect.setFillColor(sf::Color::Magenta);
+			rect.setTexture(&healthPackTexture);
 			break;
 		case EntityTypes::Mine:
-			rect.setFillColor(sf::Color::Blue);
+			rect.setTexture(&mineTexture);
 			break;
 		case EntityTypes::Obstacle:
 			rect.setFillColor(sf::Color::White);
@@ -165,6 +170,62 @@ EntityTypes Renderer::stringToEntityType(std::string& type)
 	else {
 		return EntityTypes::Unknown;
 	}
+}
+void Renderer::drawHUD(const Tank* player, const Tank* bot)
+{
+	const float HUD_MARGIN_X = 20.0f;          
+	const float HUD_TOP_OFFSET = 50.0f;        
+	const float HUD_BAR_WIDTH = 200.0f;        
+	const float HUD_BAR_HEIGHT = 20.0f;         
+	const int HUD_FONT_SIZE = 25;              
+
+	const sf::Color HUD_BG_COLOR(50, 50, 50);  
+	const sf::Color PLAYER_HEALTH_COLOR = sf::Color::Green;
+	const sf::Color BOT_HEALTH_COLOR = sf::Color::Red;
+	const sf::Color PLAYER_TEXT_COLOR = sf::Color::White;
+	const sf::Color BOT_TEXT_COLOR = sf::Color::White;
+
+	float screenWidth = static_cast<float>(window.getSize().x);
+	float playerRatio = std::max(0.f, player->getHealth() / static_cast<float>(player->getMaxHealth()));
+	float botRatio = std::max(0.f, bot->getHealth() / static_cast<float>(bot->getMaxHealth()));
+
+	sf::RectangleShape playerBack({ HUD_BAR_WIDTH, HUD_BAR_HEIGHT });
+	playerBack.setFillColor(HUD_BG_COLOR);
+	playerBack.setPosition(HUD_MARGIN_X, HUD_TOP_OFFSET);
+
+	sf::RectangleShape playerFront({ HUD_BAR_WIDTH * playerRatio, HUD_BAR_HEIGHT });
+	if (playerRatio < 0.25f) playerFront.setFillColor(sf::Color::Red);
+	else if (playerRatio < 0.5f) playerFront.setFillColor(sf::Color::Yellow);
+	else playerFront.setFillColor(PLAYER_HEALTH_COLOR);
+	playerFront.setPosition(HUD_MARGIN_X, HUD_TOP_OFFSET);
+
+	sf::RectangleShape botBack({ HUD_BAR_WIDTH, HUD_BAR_HEIGHT });
+	botBack.setFillColor(HUD_BG_COLOR);
+	botBack.setPosition(screenWidth - HUD_BAR_WIDTH - HUD_MARGIN_X, HUD_TOP_OFFSET);
+
+	sf::RectangleShape botFront({ HUD_BAR_WIDTH * botRatio, HUD_BAR_HEIGHT });
+	if (botRatio < 0.25f) botFront.setFillColor(sf::Color(100, 0, 0));
+	else if (botRatio < 0.5f) botFront.setFillColor(sf::Color(255, 140, 0));
+	else botFront.setFillColor(BOT_HEALTH_COLOR);
+	botFront.setPosition(screenWidth - HUD_BAR_WIDTH - HUD_MARGIN_X, HUD_TOP_OFFSET);
+
+	sf::Font font;
+	font.loadFromFile("Fonts/ByteBounce.ttf");
+
+	sf::Text playerText("Player", font, HUD_FONT_SIZE);
+	playerText.setFillColor(PLAYER_TEXT_COLOR);
+	playerText.setPosition(HUD_MARGIN_X, HUD_TOP_OFFSET - HUD_FONT_SIZE - 2);
+
+	sf::Text botText("Bot", font, HUD_FONT_SIZE);
+	botText.setFillColor(BOT_TEXT_COLOR);
+	botText.setPosition(screenWidth - HUD_BAR_WIDTH - HUD_MARGIN_X, HUD_TOP_OFFSET - HUD_FONT_SIZE - 2);
+
+	window.draw(playerBack);
+	window.draw(playerFront);
+	window.draw(botBack);
+	window.draw(botFront);
+	window.draw(playerText);
+	window.draw(botText);
 }
 
 

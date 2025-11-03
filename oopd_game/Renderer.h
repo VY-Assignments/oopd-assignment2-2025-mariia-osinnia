@@ -26,12 +26,16 @@ private:
 	sf::Texture playerTankTexture;
 	sf::Texture botTankTexture;
 	sf::Texture projectileTexture;
+	sf::Texture healthPackTexture;
+	sf::Texture mineTexture;
 public:
 	Renderer(sf::RenderWindow& win, EntityManager& entityM, EventManager& eventM, Map& m) : window(win), 
 		entityManager(entityM), eventManager(eventM), map(m) {
 		playerTankTexture.loadFromFile("Textures/player_tank.png");
 		botTankTexture.loadFromFile("Textures/bot_tank.png");
 		projectileTexture.loadFromFile("Textures/projectile.png");
+		healthPackTexture.loadFromFile("Textures/health_pack.png");
+		mineTexture.loadFromFile("Textures/mine.png");
 	}
 	void draw();
 	void drawFrame(const RenderData& renderData, sf::RenderWindow& window);
@@ -40,5 +44,6 @@ public:
     void drawVictoryScreen();
 	void drawGameOverScreen();
 	EntityTypes stringToEntityType(std::string& type);
+	void drawHUD(const Tank* player, const Tank* bot);
 };
 

@@ -20,6 +20,8 @@ private:
 	IEntityFactory& tankFactory;
 	IEntityFactory& interactiveObjectFactory;
 
+	Map* map;
+
 	GameState gameState = GameState::Running;
 	float timeSinceLastMine = 0.0f;
 	float timeSinceLastHealthPack = 0.0f;
@@ -31,8 +33,8 @@ private:
 
 public:
 	GameManager(EventManager& eventM, EntityManager& entityM, IEntityFactory& tankF, 
-		IEntityFactory& interactiveObjF) : eventManager(eventM), entityManager(entityM), tankFactory(tankF), 
-		interactiveObjectFactory(interactiveObjF){
+		IEntityFactory& interactiveObjF, Map* m) : eventManager(eventM), entityManager(entityM), tankFactory(tankF), 
+		interactiveObjectFactory(interactiveObjF), map(m){
 		init();
 	}
 	void init();

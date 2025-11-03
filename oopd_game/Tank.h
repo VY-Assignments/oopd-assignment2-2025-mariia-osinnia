@@ -11,6 +11,7 @@ class Tank : public IEntity, public IRenderable, public IEventHandler
 {
 private:
 	int health = 100;
+	int maxHealth = 100;
 	bool isAlive = true;
 	EntityManager& entityManager;
 	EventManager& eventManager;
@@ -54,6 +55,9 @@ public:
 
 	EventManager& getEventManager() { return eventManager; }
 	EntityManager& getEntityManager() { return entityManager; }
+
+	int getMaxHealth() const { return maxHealth; }
+	int getHealth() const { return health; }
 
 	bool isAllive() override { return isAlive; };
 };

@@ -1,15 +1,6 @@
 #include "Mine.h"
 #include "Tank.h"
 
-void Mine::onEvent(const EventType & event)
-{
-}
-
-void Mine::publishEvent(const EventType& event)
-{
-}
-
-
 void Mine::interact(Tank* tank)
 {
 	tank->takeDamage(damage);

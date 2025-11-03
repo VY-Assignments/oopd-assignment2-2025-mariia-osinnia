@@ -6,11 +6,13 @@
 #include "Projectile.h"
 #include "InteractiveObject.h"
 #include "PlayerTank.h"
+#include "BotTank.h"
 
 class EntityManager
 {
 private:
 	std::vector<std::unique_ptr<IEntity>> entities;
+	std::vector<std::unique_ptr<IEntity>> newEntities;
 public:
 	EntityManager(){}
 	void addEntity(std::unique_ptr<IEntity> entity);
@@ -18,5 +20,6 @@ public:
 	void clear();
 	void updateAll(float deltaTime);
 	PlayerTank* getPlayer();
+	BotTank* getBot();
 };
 

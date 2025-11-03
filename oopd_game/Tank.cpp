@@ -2,6 +2,7 @@
 #include "Projectile.h"
 #include "EntityManager.h" 
 #include "Obstacle.h"
+#include <iostream>
 
 void Tank::update(float deltaTime)
 {
@@ -18,6 +19,7 @@ void Tank::shoot()
 		float projectileOffset = 5.0f;
 		Vector2 projectileSpawn = position + direction * (tankHalfLength + projectileOffset);
 
+		std::cout << "Shooting! " << this << std::endl;
 		entityManager.addEntity(std::make_unique<Projectile>(projectileSpawn, direction, rotation));
 		timeSinceLastShot = 0.0f;
 	}
@@ -30,7 +32,9 @@ void Tank::takeDamage(int damage)
 
 void Tank::heal(int healBonus)
 {
-	health += healBonus;
+	if (health < maxHealth) {
+		health += healBonus;
+	}
 }
 
 void Tank::onCollision(ICollidable* other)
@@ -48,7 +52,8 @@ void Tank::onCollision(ICollidable* other)
         if (dx > 0 && dy > 0) {
             if (dx < dy) {
                 position.x += (diff.x > 0 ? dx : -dx);
-            } else {
+            } 
+			else {
                 position.y += (diff.y > 0 ? dy : -dy);
             }
         }

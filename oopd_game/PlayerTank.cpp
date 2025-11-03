@@ -47,7 +47,7 @@ void PlayerTank::onEvent(const EventType & event)
 
 void PlayerTank::publishEvent(const EventType& event)
 {
-    EventManager eventManager = getEventManager();
+    EventManager& eventManager = getEventManager();
     eventManager.notify(event);
 }   
 
