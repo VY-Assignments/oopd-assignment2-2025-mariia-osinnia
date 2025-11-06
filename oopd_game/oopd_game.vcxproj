@@ -145,6 +145,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HealthPack.cpp" />
     <ClCompile Include="InteractiveObject.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="EventType.h" />
+    <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="HealthPack.h" />
     <ClInclude Include="ICollidable.h" />

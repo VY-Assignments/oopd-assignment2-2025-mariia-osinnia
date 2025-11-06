@@ -10,8 +10,9 @@ enum InteractiveObjectType {
 };
 class InteractiveObjectFactory : public IEntityFactory
 {
-private:
+public:
 	std::unique_ptr<IEntity> create(const std::string& type, const Vector2& position) override;
-	static InteractiveObjectType parseType(const std::string& type);
+private:
+	InteractiveObjectType parseType(const std::string& type);
 };
 

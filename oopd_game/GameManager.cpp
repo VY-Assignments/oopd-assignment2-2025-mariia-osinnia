@@ -7,6 +7,7 @@
 #include "Mine.h"
 #include "HealthPack.h"
 #include <random>
+#include <iostream>
 
 void GameManager::init() {
 	Vector2 playerPosition = { 70, 410 };
@@ -24,16 +25,24 @@ void GameManager::init() {
     eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventHandler*>(playerTank.get()));
 	entityManager.addEntity(std::move(playerTank));
 
-	Vector2 botPosition = { 890, 410 };
-	std::string type1 = "bot";
-	std::unique_ptr<IEntity> botTank = tankFactory.create(type1, botPosition);
-	BotTank* botPtr = dynamic_cast<BotTank*>(botTank.get());
-	botPtr->setTarget(playerPtr);
-    botPtr->setMap(map);
-	entityManager.addEntity(std::move(botTank));
+    const Vector2 botPositions[] = {
+        {890, 610}, {890, 310}
+    };
+
+    for (int i = 0; i < botCount; ++i) {
+        std::string botType = "bot";
+        std::unique_ptr<IEntity> botTank = tankFactory.create(botType, botPositions[i]);
+        BotTank* botPtr = dynamic_cast<BotTank*>(botTank.get());
+        if (botPtr) {
+            botPtr->setTarget(playerPtr);
+            botPtr->setMap(map);
+        }
+        entityManager.addEntity(std::move(botTank));
+    }
 
 	eventManager.subscribe(EventType::GameOver, dynamic_cast<IEventHandler*>(this));
     eventManager.subscribe(EventType::Victory, dynamic_cast<IEventHandler*>(this));
+
 }
 void GameManager::update(float deltaTime)
 {
@@ -54,6 +63,10 @@ void GameManager::update(float deltaTime)
         Vector2 pos = getRandomPosition();
         entityManager.addEntity(std::make_unique<HealthPack>(pos));
         timeSinceLastHealthPack = 0.0f;
+    }
+
+    if (areAllBotsDead()) {
+        eventManager.notify(EventType::Victory);
     }
 }
 
@@ -89,6 +102,26 @@ void GameManager::onEvent(const EventType& event)
         gameState = GameState::Victory;
         shouldReset = true;
     }
+}
+
+bool GameManager::areAllBotsDead() const {
+    int botCount = 0;
+    for (auto& entity : entityManager.getEntities()) {
+        if (dynamic_cast<BotTank*>(entity.get()))
+            botCount++;
+    }
+    if (botCount == 0) {
+        return false;
+    }
+
+    for (auto& entity : entityManager.getEntities()) {
+        if (auto* bot = dynamic_cast<BotTank*>(entity.get())) {
+            if (bot->isAllive()) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 void GameManager::publishEvent(const EventType& event)

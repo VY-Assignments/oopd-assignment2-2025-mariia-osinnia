@@ -13,6 +13,8 @@ private:
 
 	bool seesPlayer = false;
 	float loseTimer = 0.0f;
+	float randTimer = 0;
+    Vector2 randDir = { 0, 0 };
 
 	bool isPathBlocked();          
 	void checkVision(float deltaTime);
@@ -27,7 +29,6 @@ public:
 	void publishEvent(const EventType& event) override;
 	void update(float deltaTime) override;
 	void findPlayer();
-	bool facePlayer(Vector2& direction, float deltaTime);
 
 	void setTarget(PlayerTank* player) { targetPlayer = player; }
 	void setMap(Map* m);

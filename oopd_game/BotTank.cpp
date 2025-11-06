@@ -12,12 +12,6 @@ void BotTank::publishEvent(const EventType& event)
 void BotTank::update(float deltaTime)
 {
     Tank::update(deltaTime);
-    if(!isAllive()) {
-        EventType event = EventType::Victory;
-        publishEvent(event);
-        IEventHandler& botTank = *dynamic_cast<IEventHandler*>(this);
-        getEventManager().unsubscribe(botTank);
-    }
     if (!targetPlayer || !map) {
         return;
     }
@@ -140,12 +134,10 @@ void BotTank::updatePatrol(float deltaTime)
 {
     const float PI = 3.1415926f;
     const float TURN_INTERVAL = 2.0f;    
-    const int   FULL_ROTATION = 360;      
+    const int FULL_ROTATION = 360;      
     const float SPEED_FACTOR = 0.5f;  
     const float SPRITE_ROTATION_OFFSET = 90.0f;
 
-    static float randTimer = 0;
-    static Vector2 randDir = { 1, 0 };
     randTimer += deltaTime;
 
     if (randTimer > TURN_INTERVAL) {

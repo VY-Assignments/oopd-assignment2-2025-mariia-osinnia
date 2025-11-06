@@ -6,4 +6,5 @@
 class IEntityFactory {
 public:
 	virtual std::unique_ptr<IEntity> create(const std::string& type, const Vector2& position) = 0;
+	virtual ~IEntityFactory() = default;
 };

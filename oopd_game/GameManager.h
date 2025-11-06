@@ -27,6 +27,7 @@ private:
 	float timeSinceLastHealthPack = 0.0f;
 	float mineSpawnInterval = 5.0f;
 	float healthPackSpawnInterval = 7.0f;
+	int botCount = 2;
 	std::mt19937 rng;
 
 	bool shouldReset = false;
@@ -40,6 +41,7 @@ public:
 	void init();
 	void update(float deltaTime);
 	void reset();
+	bool areAllBotsDead() const;
 
 	Vector2 getRandomPosition();
 	GameState getGameState() const { return gameState; }

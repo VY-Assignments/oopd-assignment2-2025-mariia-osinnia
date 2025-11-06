@@ -11,8 +11,9 @@ private:
 	float rotation = 0.0f;
 public:
 	Obstacle(const Vector2& p, const Vector2& s) : position(p), size(s) {}
-	RenderData getRenderData() const override;
 	void onCollision(ICollidable* other) override;
+
+	RenderData getRenderData() const override;
 	Vector2 getPosition() const override { return position; }
 	float getRotation() const override { return rotation; }
 	Vector2 getSize() const override { return size; }

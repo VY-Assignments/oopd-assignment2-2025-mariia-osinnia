@@ -19,7 +19,6 @@ void Tank::shoot()
 		float projectileOffset = 5.0f;
 		Vector2 projectileSpawn = position + direction * (tankHalfLength + projectileOffset);
 
-		std::cout << "Shooting! " << this << std::endl;
 		entityManager.addEntity(std::make_unique<Projectile>(projectileSpawn, direction, rotation));
 		timeSinceLastShot = 0.0f;
 	}

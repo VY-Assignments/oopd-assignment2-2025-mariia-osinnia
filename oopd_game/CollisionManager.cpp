@@ -29,9 +29,9 @@ void CollisionManager::checkCollision()
 bool CollisionManager::checkOBB(const Vector2& position1, const Vector2& size1, const float rotation1, 
     const Vector2& position2, const Vector2& size2, const float rotation2)
 {
-    Vector2 axesA[2] = { { std::cos(rotation1), std::sin(rotation1) }, { -std::sin(rotation1), std::cos(rotation1) } };
-    Vector2 axesB[2] = { { std::cos(rotation2), std::sin(rotation2) }, { -std::sin(rotation2), std::cos(rotation2) } };
-    Vector2 axes[4] = { axesA[0], axesA[1], axesB[0], axesB[1] };
+    Vector2 axesA[] = { { std::cos(rotation1), std::sin(rotation1) }, { -std::sin(rotation1), std::cos(rotation1) } };
+    Vector2 axesB[] = { { std::cos(rotation2), std::sin(rotation2) }, { -std::sin(rotation2), std::cos(rotation2) } };
+    Vector2 axes[] = { axesA[0], axesA[1], axesB[0], axesB[1] };
 
     Vector2 T = { position2.x - position1.x, position2.y - position1.y };
 
@@ -48,8 +48,9 @@ bool CollisionManager::checkOBB(const Vector2& position1, const Vector2& size1, 
 
         float distance = std::abs(T.x * axis.x + T.y * axis.y);
 
-        if (distance > rA + rB)
+        if (distance > rA + rB) {
             return false;
+        }
     }
 
     return true;

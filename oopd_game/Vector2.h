@@ -54,7 +54,11 @@ struct Vector2 {
 	}
 
 	bool operator!=(const Vector2& other) {
-		if (x != other.x || y != other.y) return true;
-		else return false;
+		if (x != other.x || y != other.y) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 };

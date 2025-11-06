@@ -1,5 +1,4 @@
 #include "EntityManager.h"
-#include <iostream>
 
 void EntityManager::addEntity(std::unique_ptr<IEntity> entity)
 {

@@ -8,7 +8,7 @@ void Renderer::draw()
 	BotTank* botTank = entityManager.getBot();
 	window.clear();
 	for (auto& obj : renderable) {
-		drawFrame(std::move(obj->getRenderData()), window); //@todo learn
+		drawFrame(std::move(obj->getRenderData()), window); 
 	}
 	if (playerTank && botTank) {
 		drawHUD(playerTank, botTank);
@@ -194,9 +194,15 @@ void Renderer::drawHUD(const Tank* player, const Tank* bot)
 	playerBack.setPosition(HUD_MARGIN_X, HUD_TOP_OFFSET);
 
 	sf::RectangleShape playerFront({ HUD_BAR_WIDTH * playerRatio, HUD_BAR_HEIGHT });
-	if (playerRatio < 0.25f) playerFront.setFillColor(sf::Color::Red);
-	else if (playerRatio < 0.5f) playerFront.setFillColor(sf::Color::Yellow);
-	else playerFront.setFillColor(PLAYER_HEALTH_COLOR);
+	if (playerRatio < 0.25f) {
+		playerFront.setFillColor(sf::Color::Red);
+	}
+	else if (playerRatio < 0.5f) {
+		playerFront.setFillColor(sf::Color::Yellow);
+	}
+	else {
+		playerFront.setFillColor(PLAYER_HEALTH_COLOR);
+	}
 	playerFront.setPosition(HUD_MARGIN_X, HUD_TOP_OFFSET);
 
 	sf::RectangleShape botBack({ HUD_BAR_WIDTH, HUD_BAR_HEIGHT });
@@ -204,9 +210,15 @@ void Renderer::drawHUD(const Tank* player, const Tank* bot)
 	botBack.setPosition(screenWidth - HUD_BAR_WIDTH - HUD_MARGIN_X, HUD_TOP_OFFSET);
 
 	sf::RectangleShape botFront({ HUD_BAR_WIDTH * botRatio, HUD_BAR_HEIGHT });
-	if (botRatio < 0.25f) botFront.setFillColor(sf::Color(100, 0, 0));
-	else if (botRatio < 0.5f) botFront.setFillColor(sf::Color(255, 140, 0));
-	else botFront.setFillColor(BOT_HEALTH_COLOR);
+	if (botRatio < 0.25f) {
+		botFront.setFillColor(sf::Color(100, 0, 0));
+	}
+	else if (botRatio < 0.5f) {
+		botFront.setFillColor(sf::Color(255, 140, 0));
+	}
+	else {
+		botFront.setFillColor(BOT_HEALTH_COLOR);
+	}
 	botFront.setPosition(screenWidth - HUD_BAR_WIDTH - HUD_MARGIN_X, HUD_TOP_OFFSET);
 
 	sf::Font font;

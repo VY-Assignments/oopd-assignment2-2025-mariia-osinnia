@@ -2,9 +2,6 @@
 #include <vector>
 #include <memory>
 #include "IEntity.h"
-#include "Tank.h"
-#include "Projectile.h"
-#include "InteractiveObject.h"
 #include "PlayerTank.h"
 #include "BotTank.h"
 

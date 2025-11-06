@@ -3,4 +3,5 @@
 class IRenderable {
 public:
 	virtual RenderData getRenderData() const = 0;
+	virtual ~IRenderable() = default;
 };
