@@ -43,12 +43,14 @@ PlayerTank* EntityManager::getPlayer()
 	return nullptr;
 }
 
-BotTank* EntityManager::getBot()
+std::vector<BotTank*> EntityManager::getBots()
 {
+	std::vector<BotTank*> bots;
 	for (auto& entity : entities) {
-		if (BotTank* player = dynamic_cast<BotTank*>(entity.get())) {
-			return player;
+		if (BotTank* bot = dynamic_cast<BotTank*>(entity.get())) {
+			bots.push_back(bot);
 		}
 	}
-	return nullptr;
+	return bots;
 }
+

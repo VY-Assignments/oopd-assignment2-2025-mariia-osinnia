@@ -105,23 +105,18 @@ void GameManager::onEvent(const EventType& event)
 }
 
 bool GameManager::areAllBotsDead() const {
-    int botCount = 0;
-    for (auto& entity : entityManager.getEntities()) {
-        if (dynamic_cast<BotTank*>(entity.get()))
-            botCount++;
-    }
-    if (botCount == 0) {
-        return false;
-    }
+    int totalBots = 0;
 
     for (auto& entity : entityManager.getEntities()) {
         if (auto* bot = dynamic_cast<BotTank*>(entity.get())) {
+            totalBots++;
             if (bot->isAllive()) {
                 return false;
             }
         }
     }
-    return true;
+
+    return totalBots > 0;
 }
 
 void GameManager::publishEvent(const EventType& event)

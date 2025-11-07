@@ -28,6 +28,9 @@ private:
 	sf::Texture projectileTexture;
 	sf::Texture healthPackTexture;
 	sf::Texture mineTexture;
+
+	float totalInitialBotHealth = 0.0f;
+	bool botsHealthInitialized = false;
 public:
 	Renderer(sf::RenderWindow& win, EntityManager& entityM, EventManager& eventM, Map& m) : window(win), 
 		entityManager(entityM), eventManager(eventM), map(m) {
@@ -40,10 +43,11 @@ public:
 	void draw();
 	void drawFrame(const RenderData& renderData, sf::RenderWindow& window);
 	void handleInput(sf::Event& event);
-	void getRenderable();
     void drawVictoryScreen();
 	void drawGameOverScreen();
 	EntityTypes stringToEntityType(std::string& type);
-	void drawHUD(const Tank* player, const Tank* bot);
+	void drawHUD(const PlayerTank* player, const std::vector<BotTank*> bots);
+
+	void getRenderable();
 };
 

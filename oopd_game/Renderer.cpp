@@ -5,13 +5,13 @@
 void Renderer::draw()
 {
 	PlayerTank* playerTank = entityManager.getPlayer();
-	BotTank* botTank = entityManager.getBot();
+	std::vector<BotTank*> bots = entityManager.getBots();
 	window.clear();
 	for (auto& obj : renderable) {
 		drawFrame(std::move(obj->getRenderData()), window); 
 	}
-	if (playerTank && botTank) {
-		drawHUD(playerTank, botTank);
+	if (playerTank && !bots.empty()) {
+		drawHUD(playerTank, bots);
 	}
 	window.display();
 }
@@ -171,7 +171,7 @@ EntityTypes Renderer::stringToEntityType(std::string& type)
 		return EntityTypes::Unknown;
 	}
 }
-void Renderer::drawHUD(const Tank* player, const Tank* bot)
+void Renderer::drawHUD(const PlayerTank* player, const std::vector<BotTank*> bots)
 {
 	const float HUD_MARGIN_X = 20.0f;          
 	const float HUD_TOP_OFFSET = 50.0f;        
@@ -187,7 +187,20 @@ void Renderer::drawHUD(const Tank* player, const Tank* bot)
 
 	float screenWidth = static_cast<float>(window.getSize().x);
 	float playerRatio = std::max(0.f, player->getHealth() / static_cast<float>(player->getMaxHealth()));
-	float botRatio = std::max(0.f, bot->getHealth() / static_cast<float>(bot->getMaxHealth()));
+
+	if (!botsHealthInitialized) {
+		for (auto* bot : bots) {
+			totalInitialBotHealth += bot->getMaxHealth();
+		}
+		botsHealthInitialized = true;
+	}
+
+	float totalCurrentHealth = 0.0f;
+	for (auto* bot : bots) {
+		totalCurrentHealth += bot->getHealth();
+	}
+
+	float avgRatio = totalCurrentHealth / totalInitialBotHealth;
 
 	sf::RectangleShape playerBack({ HUD_BAR_WIDTH, HUD_BAR_HEIGHT });
 	playerBack.setFillColor(HUD_BG_COLOR);
@@ -209,11 +222,11 @@ void Renderer::drawHUD(const Tank* player, const Tank* bot)
 	botBack.setFillColor(HUD_BG_COLOR);
 	botBack.setPosition(screenWidth - HUD_BAR_WIDTH - HUD_MARGIN_X, HUD_TOP_OFFSET);
 
-	sf::RectangleShape botFront({ HUD_BAR_WIDTH * botRatio, HUD_BAR_HEIGHT });
-	if (botRatio < 0.25f) {
+	sf::RectangleShape botFront({ HUD_BAR_WIDTH * avgRatio, HUD_BAR_HEIGHT });
+	if (avgRatio < 0.25f) {
 		botFront.setFillColor(sf::Color(100, 0, 0));
 	}
-	else if (botRatio < 0.5f) {
+	else if (avgRatio < 0.5f) {
 		botFront.setFillColor(sf::Color(255, 140, 0));
 	}
 	else {

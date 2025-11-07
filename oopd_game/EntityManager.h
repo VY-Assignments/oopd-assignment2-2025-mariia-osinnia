@@ -17,6 +17,6 @@ public:
 	void clear();
 	void updateAll(float deltaTime);
 	PlayerTank* getPlayer();
-	BotTank* getBot();
+	std::vector<BotTank*> getBots();
 };
 
