@@ -57,7 +57,7 @@ void PlayerTank::update(float deltaTime)
     if (!isAllive()) {
         EventType event = EventType::GameOver;
         publishEvent(event);
-        IEventHandler& playerTank = *dynamic_cast<IEventHandler*>(this);
+        IEventListener& playerTank = *dynamic_cast<IEventListener*>(this);
         getEventManager().unsubscribe(playerTank);
     }
     const float PI = 3.1415926f;
@@ -89,4 +89,5 @@ void PlayerTank::update(float deltaTime)
 
     setPosition(position);
 }
+
 

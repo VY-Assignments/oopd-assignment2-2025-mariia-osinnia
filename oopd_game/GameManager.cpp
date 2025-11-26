@@ -14,15 +14,15 @@ void GameManager::init() {
 	std::string type = "player";
 	std::unique_ptr<IEntity> playerTank = tankFactory.create(type, playerPosition);
 	PlayerTank* playerPtr = dynamic_cast<PlayerTank*>(playerTank.get());
-	eventManager.subscribe(EventType::MovingForward, dynamic_cast<IEventHandler*>(playerTank.get()));
-	eventManager.subscribe(EventType::MovingBackward, dynamic_cast<IEventHandler*>(playerTank.get()));
-	eventManager.subscribe(EventType::TurnLeft, dynamic_cast<IEventHandler*>(playerTank.get()));
-	eventManager.subscribe(EventType::TurnRight, dynamic_cast<IEventHandler*>(playerTank.get()));
-    eventManager.subscribe(EventType::StopForward, dynamic_cast<IEventHandler*>(playerTank.get()));
-    eventManager.subscribe(EventType::StopBackward, dynamic_cast<IEventHandler*>(playerTank.get()));
-    eventManager.subscribe(EventType::StopTurnLeft, dynamic_cast<IEventHandler*>(playerTank.get()));
-    eventManager.subscribe(EventType::StopTurnRight, dynamic_cast<IEventHandler*>(playerTank.get()));
-    eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventHandler*>(playerTank.get()));
+	eventManager.subscribe(EventType::MovingForward, dynamic_cast<IEventListener*>(playerTank.get()));
+	eventManager.subscribe(EventType::MovingBackward, dynamic_cast<IEventListener*>(playerTank.get()));
+	eventManager.subscribe(EventType::TurnLeft, dynamic_cast<IEventListener*>(playerTank.get()));
+	eventManager.subscribe(EventType::TurnRight, dynamic_cast<IEventListener*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopForward, dynamic_cast<IEventListener*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopBackward, dynamic_cast<IEventListener*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopTurnLeft, dynamic_cast<IEventListener*>(playerTank.get()));
+    eventManager.subscribe(EventType::StopTurnRight, dynamic_cast<IEventListener*>(playerTank.get()));
+    eventManager.subscribe(EventType::Shoot, dynamic_cast<IEventListener*>(playerTank.get()));
 	entityManager.addEntity(std::move(playerTank));
 
     const Vector2 botPositions[] = {
@@ -40,9 +40,8 @@ void GameManager::init() {
         entityManager.addEntity(std::move(botTank));
     }
 
-	eventManager.subscribe(EventType::GameOver, dynamic_cast<IEventHandler*>(this));
-    eventManager.subscribe(EventType::Victory, dynamic_cast<IEventHandler*>(this));
-
+	eventManager.subscribe(EventType::GameOver, dynamic_cast<IEventListener*>(this));
+    eventManager.subscribe(EventType::Victory, dynamic_cast<IEventListener*>(this));
 }
 void GameManager::update(float deltaTime)
 {
@@ -119,7 +118,4 @@ bool GameManager::areAllBotsDead() const {
     return totalBots > 0;
 }
 
-void GameManager::publishEvent(const EventType& event)
-{
-}
 

@@ -1,7 +1,9 @@
 #pragma once
 #include "Tank.h"
 #include "RenderData.h"
-class PlayerTank : public Tank
+#include "IEventPublisher.h"
+#include "IEventListener.h"
+class PlayerTank : public Tank, public IEventPublisher, public IEventListener
 {
 private:
 	std::string type = "playerTank";
@@ -12,8 +14,8 @@ private:
 public:
 	PlayerTank(EntityManager& entityM, EventManager& eventM, const Vector2& position) : Tank(entityM, eventM, position) {}
 	RenderData getRenderData() const override;
-	void onEvent(const EventType& event) override;
 	void publishEvent(const EventType& event) override;
+	void onEvent(const EventType& event) override;
 	void update(float deltaTime) override;
 };
 

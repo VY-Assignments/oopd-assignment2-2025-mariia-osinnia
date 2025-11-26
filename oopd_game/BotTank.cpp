@@ -3,11 +3,11 @@
 #include "EntityManager.h"
 #include <ctime>
 
-void BotTank::publishEvent(const EventType& event)
-{
-    EventManager& eventManager = getEventManager();
-    eventManager.notify(event);
-}
+//void BotTank::publishEvent(const EventType& event)
+//{
+//    EventManager& eventManager = getEventManager();
+//    eventManager.notify(event);
+//}
 
 void BotTank::update(float deltaTime)
 {
@@ -180,6 +180,3 @@ RenderData BotTank::getRenderData() const
     return renderData;
 }
 
-void BotTank::onEvent(const EventType & event)
-{
-}

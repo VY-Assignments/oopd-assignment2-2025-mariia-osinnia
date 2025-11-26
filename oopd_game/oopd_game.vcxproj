@@ -148,6 +148,7 @@
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HealthPack.cpp" />
+    <ClCompile Include="IEventPublisher.cpp" />
     <ClCompile Include="InteractiveObject.cpp" />
     <ClCompile Include="InteractiveObjectFactory.cpp" />
     <ClCompile Include="main.cpp" />
@@ -172,7 +173,8 @@
     <ClInclude Include="ICollidable.h" />
     <ClInclude Include="IEntity.h" />
     <ClInclude Include="IEntityFactory.h" />
-    <ClInclude Include="IEventHandler.h" />
+    <ClInclude Include="IEventListener.h" />
+    <ClInclude Include="IEventPublisher.h" />
     <ClInclude Include="InteractiveObject.h" />
     <ClInclude Include="InteractiveObjectFactory.h" />
     <ClInclude Include="IRenderable.h" />

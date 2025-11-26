@@ -1,13 +1,12 @@
 #pragma once
 #include "IEntity.h"
 #include "IRenderable.h"
-#include "IEventHandler.h"
 #include "Vector2.h"
 #include "EventManager.h"
 #include "ICollidable.h"
 class EntityManager;
 
-class Tank : public IEntity, public IRenderable, public IEventHandler
+class Tank : public IEntity, public IRenderable
 {
 private:
 	int health = 100;
@@ -29,8 +28,6 @@ public:
 	Tank(EntityManager& entityM, EventManager& eventM, const Vector2& p) : entityManager(entityM), eventManager(eventM), position(p) {}
 
 	virtual RenderData getRenderData() const = 0;
-	virtual void onEvent(const EventType& event) = 0;
-	virtual void publishEvent(const EventType& event) = 0;
 	virtual void update(float deltaTime) = 0;
 	void shoot();
 	void takeDamage(int damage);

@@ -11,7 +11,7 @@ enum class GameState {
 	Victory
 };
 
-class GameManager : public IEventHandler
+class GameManager : public IEventListener
 {
 private:
 	EventManager& eventManager;
@@ -49,6 +49,5 @@ public:
 	void setShouldReset(bool shouldR) { shouldReset = shouldR; }
 
 	void onEvent(const EventType& event) override;
-	void publishEvent(const EventType& event) override;
 };
 

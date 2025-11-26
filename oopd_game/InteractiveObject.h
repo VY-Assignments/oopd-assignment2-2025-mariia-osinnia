@@ -1,6 +1,5 @@
 #pragma once
 #include "IEntity.h"
-#include "IEventHandler.h"
 #include "Vector2.h"
 #include "IRenderable.h"
 class Tank;

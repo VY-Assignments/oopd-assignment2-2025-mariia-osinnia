@@ -1,14 +1,14 @@
 #include "EventManager.h"
 
-void EventManager::subscribe(const EventType& event, IEventHandler* listener)
+void EventManager::subscribe(const EventType& event, IEventListener* listener)
 {
-	std::vector<IEventHandler*>& listeners = event_map[event];
+	std::vector<IEventListener*>& listeners = event_map[event];
 	if (std::find(listeners.begin(), listeners.end(), listener) == listeners.end()) {
 		listeners.push_back(listener);
 	}
 }
 
-void EventManager::unsubscribe(IEventHandler& entity)
+void EventManager::unsubscribe(IEventListener& entity)
 {
 	for (auto& [eventType, listeners] : event_map) {
 		listeners.erase(

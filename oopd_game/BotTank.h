@@ -2,6 +2,7 @@
 #include "Tank.h"
 #include "PlayerTank.h"
 #include "Map.h"
+#include "IEventPublisher.h"
 
 class BotTank : public Tank
 {
@@ -25,8 +26,6 @@ public:
 	BotTank(EntityManager& entityM, EventManager& eventM, const Vector2& position) : Tank(entityM, eventM, position) {
 	}
 	RenderData getRenderData() const override;
-	void onEvent(const EventType& event) override;
-	void publishEvent(const EventType& event) override;
 	void update(float deltaTime) override;
 	void findPlayer();
 
