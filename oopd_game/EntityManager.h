@@ -14,6 +14,7 @@ public:
 	EntityManager(){}
 	void addEntity(std::unique_ptr<IEntity> entity);
 	std::vector<std::unique_ptr<IEntity>>& getEntities();
+	std::vector<BotTank*> getBotTanks();
 	void clear();
 	void updateAll(float deltaTime);
 	PlayerTank* getPlayer();

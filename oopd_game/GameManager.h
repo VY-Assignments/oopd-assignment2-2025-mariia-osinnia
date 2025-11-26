@@ -31,12 +31,12 @@ private:
 	std::mt19937 rng;
 
 	bool shouldReset = false;
+	bool botsWereSpawned = false;
 
 public:
 	GameManager(EventManager& eventM, EntityManager& entityM, IEntityFactory& tankF, 
 		IEntityFactory& interactiveObjF, Map* m) : eventManager(eventM), entityManager(entityM), tankFactory(tankF), 
 		interactiveObjectFactory(interactiveObjF), map(m){
-		init();
 	}
 	void init();
 	void update(float deltaTime);

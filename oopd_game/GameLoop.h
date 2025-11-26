@@ -20,15 +20,15 @@ private:
     Renderer renderer;
     TankFactory tankFactory;
     InteractiveObjectFactory interactiveObjectFactory;
-    GameManager gameManager;
     CollisionManager collisionManager;
+    GameManager gameManager;
 
 public:
     GameLoop() : window(sf::VideoMode(960, 720), "Tanks Game"),
         renderer(window, entityManager, eventManager, map),
         tankFactory(entityManager, eventManager),
         interactiveObjectFactory(),
-        gameManager(eventManager, entityManager, tankFactory, interactiveObjectFactory, &map),
-        collisionManager(entityManager, map) {}
+        collisionManager(entityManager, map),
+        gameManager(eventManager, entityManager, tankFactory, interactiveObjectFactory, &map) {}
     void run();
 };

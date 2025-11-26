@@ -10,6 +10,17 @@ std::vector<std::unique_ptr<IEntity>>& EntityManager::getEntities()
 	return entities;
 }
 
+std::vector<BotTank*> EntityManager::getBotTanks()
+{
+	std::vector<BotTank*> bots;
+	for (auto& entity : entities) {
+		if (BotTank* bot = dynamic_cast<BotTank*>(entity.get())) {
+			bots.push_back(bot);
+		}
+	}
+	return bots;
+}
+
 void EntityManager::clear()
 {
 	entities.clear();
@@ -18,14 +29,14 @@ void EntityManager::clear()
 
 void EntityManager::updateAll(float deltaTime)
 {
-	for (auto& entity : entities) {
-		entity->update(deltaTime);
-	}
-
 	if (!newEntities.empty()) {
 		for (auto& e : newEntities)
 			entities.push_back(std::move(e));
 		newEntities.clear();
+	}
+
+	for (auto& entity : entities) {
+		entity->update(deltaTime);
 	}
 
 	entities.erase(std::remove_if(entities.begin(), entities.end(), [](const std::unique_ptr<IEntity>& e) {

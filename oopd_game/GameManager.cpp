@@ -7,7 +7,6 @@
 #include "Mine.h"
 #include "HealthPack.h"
 #include <random>
-#include <iostream>
 
 void GameManager::init() {
 	Vector2 playerPosition = { 70, 410 };
@@ -42,6 +41,8 @@ void GameManager::init() {
 
 	eventManager.subscribe(EventType::GameOver, dynamic_cast<IEventListener*>(this));
     eventManager.subscribe(EventType::Victory, dynamic_cast<IEventListener*>(this));
+
+    botsWereSpawned = true;
 }
 void GameManager::update(float deltaTime)
 {
@@ -73,6 +74,8 @@ void GameManager::reset()
 {
     eventManager.unsubscribeAll();
     entityManager.clear();
+    botsWereSpawned = false;
+
     init();
     gameState = GameState::Running;
     timeSinceLastHealthPack = 0.0f;
@@ -104,18 +107,15 @@ void GameManager::onEvent(const EventType& event)
 }
 
 bool GameManager::areAllBotsDead() const {
-    int totalBots = 0;
+    std::vector<BotTank*> bots = entityManager.getBotTanks();
 
-    for (auto& entity : entityManager.getEntities()) {
-        if (auto* bot = dynamic_cast<BotTank*>(entity.get())) {
-            totalBots++;
-            if (bot->isAllive()) {
-                return false;
-            }
-        }
+    if (!botsWereSpawned) {
+        return false;
     }
-
-    return totalBots > 0;
+    if (bots.empty()) {
+        return true;
+    }
+    return false;
 }
 
 
